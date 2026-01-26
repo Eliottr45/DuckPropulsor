@@ -1,20 +1,43 @@
 export class Objects {
-  constructor() {}
+  #coordX;
+  #coordY;
+  #width;
+  #height;
 
-  // paramètres coord X et une coord Y
-  hitBox() {
-    throw new Error("La hitbox doit être défini dans la class de l'objet");
-    //calcule du canvas pour faire la hitbox
+  constructor(coordX, coordY, width, height) {
+    this.#coordX = coordX;
+    this.#coordY = coordY;
+    this.#width = width;
+    this.#height = height;
   }
 
-  // paramètres coord perso et coord de l'objet
-  onCollide() {
-    throw new Error(
-      "La collision doit se calculer dans la fonciton affilé à l'objet",
-    );
+  // paramètres coord X et une coord Y
+  hitBox(ctx) {
+    ctx.fillRect(this.#coordX, this.#coordY, this.#width, this.#height);
+  }
 
-    // si le X du player === le X de l'object et le Y du player === le Y de l'object alors actions
-    // définitions des zones de contact de bases dans le onCollides dans Objects et cas par cas dans les différentes class
+  deplacement() {
+    const speed = 100; // px par seconde
+    const step = speed * (16 / 1000); // px par tick
+
+    setInterval(() => {
+      this.#coordX -= step;
+    }, 16);
+  }
+
+  onCollide(persoHitbox) {
+    //persoHitbox = {persoX: 50, persoY: 50, endPersoX: 100 --> startX + width, endPersoY: 100 --> startY + height}
+    const endX = this.#coordX + this.#width;
+    const endY = this.#coordY + this.#height;
+    if (
+      persoHitbox.persoX < endX &&
+      persoHitbox.endPersoX > this.#coordX &&
+      persoHitbox.endPersoY > this.#coordY &&
+      persoHitbox.persoY < endY
+    ) {
+      return true;
+    }
+    return false;
   }
 
   // paramètres url/chemin du sprite
