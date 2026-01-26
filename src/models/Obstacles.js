@@ -1,3 +1,7 @@
 export class Obstacles extends Objects {
-  // constructor()
+  constructor(
+    coordX,
+    coordY,
+  )
 }
+
