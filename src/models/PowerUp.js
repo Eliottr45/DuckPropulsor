@@ -1,3 +1,3 @@
-export class PowerUp extends Objects {
+export class PowerUp {
   // constructor()
 }

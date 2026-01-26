@@ -1,3 +1,3 @@
-export class Obstacles extends Objects {
+export class Obstacles {
   // constructor()
 }

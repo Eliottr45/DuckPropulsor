@@ -1,4 +1,4 @@
 // création d'une classe
-export class Personnage extends Objects {
+export class Personnage {
   // constructor()
 }

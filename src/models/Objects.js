@@ -1,3 +1,3 @@
 export class Objects {
-  constructor(title) {}
+  constructor() {}
 }

@@ -1,3 +1,3 @@
-export class Coins extends Objects {
+export class Coins {
   // constructor()
 }
