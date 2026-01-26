@@ -1,7 +1,14 @@
 export class Obstacles extends Objects {
-  constructor(
-    coordX,
-    coordY,
-  )
-}
+  constructor() {
+    super();
+  }
 
+  onCollide() {}
+
+  vivant() {
+    // const response = this.onCollide(...)
+    if (response === true) {
+      console.log("Vous avez paerdus !");
+    }
+  }
+}
