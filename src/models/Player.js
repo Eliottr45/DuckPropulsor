@@ -1,6 +1,6 @@
 // création d'une classe
 export class Personnage {
-  // constructor()
+  constructor() {}
 
   getBounds() {
     return {
@@ -10,4 +10,6 @@ export class Personnage {
       endY: 0,
     };
   }
+
+  updateY() {} //function qui update les deplacement verticale
 }
