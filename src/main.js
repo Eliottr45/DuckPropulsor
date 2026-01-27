@@ -31,6 +31,8 @@ body.append(sectionHomePage);
 // ! Création de la page de jeu
 // const carousel = document.createElement("div");
 // carousel.classList.add("carousel");
+// const carouselQuery = document.querySelector(".carousel");
+// carouselQuery.style.display = "none";
 
 // const divTrack = document.createElement("div");
 // divTrack.classList.add("track");
@@ -56,6 +58,8 @@ body.append(sectionHomePage);
 // ! Création de skinPage
 // const sectionSkinPage = document.createElement("section");
 // sectionSkinPage.setAttribute("id", "skin-page");
+// const skinPageQuery = document.getElementById("skin-page");
+// skinPageQuery.style.display = "none";
 
 // const titleSkinPage = document.createElement("h2");
 // titleSkinPage.textContent = "Page des skins";
@@ -66,6 +70,8 @@ body.append(sectionHomePage);
 // ! Création de SettingPage
 // const sectionSettingPage = document.createElement("section");
 // sectionSettingPage.setAttribute("id", "setting-page");
+// const settingPageQuery = document.getElementById("setting-page");
+// settingPageQuery.style.display = "none";
 
 // const titleSettingPage = document.createElement("h2");
 // titleSettingPage.textContent = "Page des settings";
