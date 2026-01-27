@@ -42,13 +42,13 @@ function createElements(container) {
   card.classList.add("card");
 
   const img = document.createElement("img");
-  img.setAttribute("src", "./src/assets/bg.png");
+  img.setAttribute("src", "./src/assets/test.jpg");
 
   const card2 = document.createElement("div");
   card2.classList.add("card");
 
   const img2 = document.createElement("img");
-  img2.setAttribute("src", "./src/assets/bg.png");
+  img2.setAttribute("src", "./src/assets/test.jpg");
 
   card2.append(img2);
   card.append(img);
@@ -92,16 +92,26 @@ function createElements(container) {
   track.innerHTML += track.innerHTML;
 
   let position = 0;
-  const speed = 400;
-  const step = speed * (8 / 1000);
+  const speed = 200; // Pixels par seconde
+  let lastTimestamp = 0;
 
-  setInterval(() => {
-    position -= step;
+  function animate(timestamp) {
+    // Calcul du temps écoulé entre deux frames (delta time)
+    if (!lastTimestamp) lastTimestamp = timestamp;
+    const deltaTime = (timestamp - lastTimestamp) / 1000; // en secondes
+    lastTimestamp = timestamp;
+    // Mise à jour de la position basée sur le temps réel
+    position -= speed * deltaTime;
+    // Réinitialisation si on a défilé la moitié du contenu
     if (Math.abs(position) >= track.scrollWidth / 2) {
       position = 0;
     }
     track.style.transform = `translateX(${position}px)`;
-  }, 8);
+    // On demande la frame suivante
+    requestAnimationFrame(animate);
+  }
+  // Lancement de l'animation
+  requestAnimationFrame(animate);
 }
 
 function attachEvent() {
