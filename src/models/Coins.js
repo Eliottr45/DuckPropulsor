@@ -1,17 +1,19 @@
-export class Coins {
+export class Coins extends Objects {
+  #coins;
   constructor() {
     super();
+    this.coins = 0;
   }
 
-  getCanvas(){
-    const canvas = document.getElementById("game");
-    if (!canvas){
-      throw new Error ("Canvas introuvable")
+  update(player) {
+    if (this.onCollide(player)) {
+      this.action(player);
+      return true;
     }
-    return canvas
+    return false;
   }
 
-  getContext(){
-    // const ctx 
+  action(player) {
+    this.coins += 1;
   }
 }
