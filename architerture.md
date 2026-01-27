@@ -1,5 +1,6 @@
 # tree DuckPropulsor
 
+````text
 DuckPropulsor
 ├── .gitignore
 ├── README.md
@@ -9,18 +10,19 @@ DuckPropulsor
 ├── public
 │ └── vite.svg
 └── src
-├── controllers
-│ └── duckController.js
-├── managers
-│ └── duckManager.js
-├── models
-│ ├── Coins.js
-│ ├── Objects.js
-│ ├── Obstacles.js
-│ ├── Personnage.js
-│ └── PowerUp.js
-├── utils
-│ └── EventEmitters.js
-└── style.css
+    ├── controllers
+    │ └── duckController.js
+    ├── managers
+    │ └── duckManager.js
+    ├── models
+    │ ├── Coins.js
+    │ ├── Objects.js
+    │ ├── Obstacles.js
+    │ ├── Personnage.js
+    │ └── PowerUp.js
+    ├── utils
+    │ └── EventEmitters.js
+    └── style.css```
 
 6 directories, 15 files
+````
