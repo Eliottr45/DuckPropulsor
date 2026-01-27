@@ -16,6 +16,16 @@ export class Objects {
     ctx.fillRect(this.#coordX, this.#coordY, this.#width, this.#height);
   }
 
+  insertasset(pathimage, ctx) {
+    ctx.drawImage(
+      pathimage,
+      this.#coordX,
+      this.#coordY,
+      this.#width,
+      this.#height,
+    );
+  }
+
   //affichage de la hitbox dans le canvas
   sprite() {
     const canvas = document.getElementById("game");
