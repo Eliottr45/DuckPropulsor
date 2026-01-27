@@ -1,13 +1,13 @@
 import "./style.css";
 
-// * Création du body
 const body = document.body;
 
+// ! Création du homePage
 const sectionHomePage = document.createElement("section");
 sectionHomePage.setAttribute("id", "home-page");
 
-const title = document.createElement("h1");
-title.textContent("DuckPropulsor");
+const titleHomePage = document.createElement("h1");
+titleHomePage.textContent = "DuckPropulsor";
 
 const divFlex = document.createElement("div");
 divFlex.classList.add("flex");
@@ -25,10 +25,10 @@ buttonSetting.setAttribute("id", "setting");
 buttonSetting.textContent = "Paramètres";
 
 divFlex.append(buttonPlay, buttonSkin, buttonSetting);
-sectionHomePage.append(title, divFlex);
+sectionHomePage.append(titleHomePage, divFlex);
 body.append(sectionHomePage);
 
-// * Création du carousel
+// ! Création de la page de jeu
 // const carousel = document.createElement("div");
 // carousel.classList.add("carousel");
 
@@ -52,6 +52,26 @@ body.append(sectionHomePage);
 // divTrack.append(card);
 // carousel.append(divTrack);
 // body.append(carousel);
+
+// ! Création de skinPage
+// const sectionSkinPage = document.createElement("section");
+// sectionSkinPage.setAttribute("id", "skin-page");
+
+// const titleSkinPage = document.createElement("h2");
+// titleSkinPage.textContent = "Page des skins";
+
+// sectionSkinPage.append(titleSkinPage);
+// body.append(sectionSkinPage);
+
+// ! Création de SettingPage
+// const sectionSettingPage = document.createElement("section");
+// sectionSettingPage.setAttribute("id", "setting-page");
+
+// const titleSettingPage = document.createElement("h2");
+// titleSettingPage.textContent = "Page des settings";
+
+// sectionSettingPage.append(titleSettingPage);
+// body.append(sectionSettingPage);
 
 // * Création du setInterval
 const track = document.querySelector(".track");
