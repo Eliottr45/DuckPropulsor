@@ -40,8 +40,8 @@ export class Objects {
   }
 
   //déplacement de la hitbox
-  deplacement() {
-    const track = document.querySelector(".track");
+  deplacement(classObjet) {
+    const track = document.querySelector(".classObjet");
     track.innerHTML += track.innerHTML;
 
     let position = this.#coordX;
