@@ -3,7 +3,16 @@
   padding: 0;
 }
 
-.carousel {
+#game {
+  display: none;
+  background-color: transparent;
+  position: absolute;
+  z-index: 11;
+  width: 100%;
+  height: 100vh;
+}
+
+#home-page {
   overflow: hidden;
   width: 100vw;
 }
