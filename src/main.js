@@ -1,6 +1,15 @@
 import "./style.css";
 import { init } from "./display/interactions.js";
+import { Coins } from "./data/Coins.js";
+
 const container = document.body;
+
+const canvas = document.getElementById("game");
+const coins = new Coins(50, 50, 50, 50);
+const ctx = canvas.getContext("2d");
+coins.hitBox(ctx);
+coins.spritehitbox();
+
 init(container);
 
 function clear() {

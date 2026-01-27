@@ -1,3 +1,4 @@
+import { Objects } from "./Objects.js";
 export class Coins extends Objects {
   #coins;
   constructor() {
