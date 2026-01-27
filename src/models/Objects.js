@@ -11,11 +11,19 @@ export class Objects {
     this.#height = height;
   }
 
-  // paramètres coord X et une coord Y
+  // création de la hitbox
   hitBox(ctx) {
     ctx.fillRect(this.#coordX, this.#coordY, this.#width, this.#height);
   }
 
+  //affichage de la hitbox dans le canvas
+  sprite() {
+    const canvas = document.getElementById("game");
+    const ctx = canvas.getContext("2d");
+    hitBox(ctx);
+  }
+
+  //déplacement de la hitbox
   deplacement() {
     const speed = 100; // px par seconde
     const step = speed * (16 / 1000); // px par tick
@@ -25,6 +33,7 @@ export class Objects {
     }, 16);
   }
 
+  //collision de la hitbox
   onCollide(persoHitbox) {
     //persoHitbox = {persoX: 50, persoY: 50, endPersoX: 100 --> startX + width, endPersoY: 100 --> startY + height}
     const endX = this.#coordX + this.#width;
@@ -38,19 +47,5 @@ export class Objects {
       return true;
     }
     return false;
-  }
-
-  // paramètres url/chemin du sprite
-  sprite() {
-    throw new Error(
-      "L'url du sprite doit être défini dans la class de l'objet",
-    );
-  }
-
-  // paramètres coord X et Y de l'endroite ou l'on veut placer le sprite
-  coordSprite() {
-    throw new Error(
-      "Lae coord sprite doit être défini dans la class de l'objet",
-    );
   }
 }
