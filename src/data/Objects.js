@@ -27,38 +27,44 @@ export class Objects {
   }
 
   //affichage de la hitbox dans le canvas
-  sprite() {
+  spritehitbox() {
     const canvas = document.getElementById("game");
     const ctx = canvas.getContext("2d");
     hitBox(ctx);
   }
 
-  //déplacement de la hitbox
-  deplacement() {
-    const speed = 100; // px par seconde
-    const step = speed * (16 / 1000); // px par tick
-
-    setInterval(() => {
-      this.#coordX -= step;
-    }, 16);
+  spriteasset() {
+    const canvas = document.getElementById("game");
+    const ctx = canvas.getContext("2d");
+    insertasset(ctx);
   }
 
-  //insertion de l'asset dans la hitbox
+  //déplacement de la hitbox
+  deplacement() {
+    const track = document.querySelector(".track");
+    track.innerHTML += track.innerHTML;
 
-  inserthitbox(pathimage, ctx) {
-    const coordXend = this.#coordX + this.#width;
-    const coordYend = this.#coordY + this.#height;
+    let position = this.#coordX;
+    const speed = 200; // Pixels par seconde
+    let lastTimestamp = 0;
 
-    coordXimage = this.#coordX + coordXend / 2;
-    coordYimage = this.#coordY + coordYend / 2;
-
-    ctx.drawImage(
-      pathimage,
-      coordXimage,
-      coordYimage,
-      this.#width,
-      this.#height,
-    );
+    function animate(timestamp) {
+      // Calcul du temps écoulé entre deux frames (delta time)
+      if (!lastTimestamp) lastTimestamp = timestamp;
+      const deltaTime = (timestamp - lastTimestamp) / 1000; // en secondes
+      lastTimestamp = timestamp;
+      // Mise à jour de la position basée sur le temps réel
+      position -= speed * deltaTime;
+      // Réinitialisation si on a défilé la moitié du contenu
+      if (Math.abs(position) >= track.scrollWidth / 2) {
+        position = 0;
+      }
+      track.style.transform = `translateX(${position}px)`;
+      // On demande la frame suivante
+      requestAnimationFrame(animate);
+    }
+    // Lancement de l'animation
+    requestAnimationFrame(animate);
   }
 
   //collision de la hitbox
