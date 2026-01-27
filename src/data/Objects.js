@@ -33,6 +33,24 @@ export class Objects {
     }, 16);
   }
 
+  //insertion de l'asset dans la hitbox
+
+  inserthitbox(pathimage, ctx) {
+    const coordXend = this.#coordX + this.#width;
+    const coordYend = this.#coordY + this.#height;
+
+    coordXimage = this.#coordX + coordXend / 2;
+    coordYimage = this.#coordY + coordYend / 2;
+
+    ctx.drawImage(
+      pathimage,
+      coordXimage,
+      coordYimage,
+      this.#width,
+      this.#height,
+    );
+  }
+
   //collision de la hitbox
   onCollide(persoHitbox) {
     //persoHitbox = {persoX: 50, persoY: 50, endPersoX: 100 --> startX + width, endPersoY: 100 --> startY + height}
