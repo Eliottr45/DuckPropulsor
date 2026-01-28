@@ -1,29 +1,31 @@
 import { Objects } from "./Objects.js";
 export class Coins extends Objects {
   #coins;
+  #collected;
 
-  constructor(x, y, width, height) {
-    super(x, y, width, height);
+  constructor(coordX, coordY, width, height) {
+    super(coordX, coordY, width, height);
     this.#coins = 0;
+    this.#collected = false;
+  }
+
+  getCoin() {
+    return this.#coins;
   }
 
   getRandomNumber(min, max) {
     return Math.random() * (max - min) + min;
   }
 
-  update(player, compteurp, speed) {
+  // ! a terminer !
+  destroy(player) {
     if (this.onCollide(player)) {
-      this.#coins += 1;
-      let score = `"Score coins:"${this.#coins}`;
-      compteurp.textContent = score;
-      moveLeft(speed);
+      // this.#coordY = 300;
+      const temp = window.innerWidth * 2;
+      const x = this.getRandomNumber(window.innerWidth, temp);
+      const y = this.getRandomNumber(100, window.innerHeight) - 100;
+      this.setPositionX(x);
+      this.setPositionY(y);
     }
-  }
-
-  moveLeft(speed) {
-    this.x -= speed;
-    const temp = window.innerWidth * 2;
-    this.x = this.getRandomNumber(window.innerWidth, temp);
-    this.y = this.getRandomNumber(0, window.innerHeight) - 100;
   }
 }

@@ -35,6 +35,12 @@ function createElements(container) {
   homePage.setAttribute("id", "play-page");
   homePage.style.display = "none";
 
+  const compteurdiv = document.createElement("div");
+  compteurdiv.classList.add("counter");
+  const compteurp = document.createElement("p");
+  compteurp.setAttribute("id", "compteur-coins");
+  // ? compteurp.textContent = "score";
+
   const divTrack = document.createElement("div");
   divTrack.classList.add("track");
 
@@ -54,7 +60,8 @@ function createElements(container) {
   card.append(img);
   divTrack.append(card);
   divTrack.append(card2);
-  homePage.append(divTrack);
+  compteurdiv.append(compteurp);
+  homePage.append(compteurdiv, divTrack);
   container.append(homePage);
 
   // ! Création de skinPage
@@ -112,12 +119,6 @@ function createElements(container) {
   }
   // Lancement de l'animation
   requestAnimationFrame(animate);
-
-  // ! Création du compteur de pièces
-  const compteurdiv = document.createElement(div);
-  const compteurp = document.createElement(p);
-  sectionHomePage.append(compteurdiv);
-  compteurdiv.append(compteurp);
 }
 
 //créer une div et un p dans le body

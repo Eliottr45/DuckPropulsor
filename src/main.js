@@ -118,7 +118,11 @@ function gameLoop(player) {
   tableCoins.forEach((coin) => {
     // Affichage de la hitbox (debug)
     coin.hitBox(ctx);
+<<<<<<< HEAD
     // Affichage de l'image de la piÃ¨ce
+=======
+    // Affichage de l'image de la pièce
+>>>>>>> 4991e6ce132d8c95c50b7320d22a97728737e827
     coin.insertasset(image, ctx);
   });
 
