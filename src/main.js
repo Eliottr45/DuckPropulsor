@@ -80,7 +80,8 @@ imageJoueur.src = imagePlayer;
 init(container);
 
 function gameLoop() {
-  coins.update(player, compteurp, speed);
+  console.log(coins);
+  // coins.update(player, compteurp, speed);
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 

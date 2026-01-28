@@ -23,11 +23,4 @@ export class Coins extends Objects {
       moveLeft(speed);
     }
   }
-
-  moveLeft(speed) {
-    this.x -= speed;
-    const temp = window.innerWidth * 2;
-    this.x = this.getRandomNumber(window.innerWidth, temp);
-    this.y = this.getRandomNumber(0, window.innerHeight) - 100;
-  }
 }

@@ -18,6 +18,7 @@ export class Objects {
   moveLeft(speed) {
     this.#coordX -= speed;
     if (this.#coordX + this.#width < 0) {
+      // this.#coordY = 300;
       const temp = window.innerWidth * 2;
       this.#coordX = this.getRandomNumber(window.innerWidth, temp);
       this.#coordY = this.getRandomNumber(0, window.innerHeight) - 100;

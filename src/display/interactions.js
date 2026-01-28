@@ -59,7 +59,7 @@ function createElements(container) {
   divTrack.append(card);
   divTrack.append(card2);
   compteurdiv.append(compteurp);
-  homePage.append(compteurdiv, divTrack);
+  homePage.append(divTrack, compteurdiv);
   container.append(homePage);
 
   // ! Création de skinPage
