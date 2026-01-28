@@ -4,6 +4,7 @@ export class PLayer {
   #coordY;
   #width;
   #height;
+  #alive;
 
   constructor(coordX, coordY, width, height) {
     this.#coordX = coordX;
@@ -11,6 +12,7 @@ export class PLayer {
     this.#width = width;
     this.#height = height;
     this.pressedSpace = false;
+    this.#alive = true;
     this._initFly();
   }
 
@@ -22,6 +24,15 @@ export class PLayer {
       endX: this.#coordX + this.#width,
       endY: this.#coordY + this.#height,
     };
+  }
+
+  getAlive() {
+    return this.#alive;
+  }
+
+  die() {
+    this.#alive = false;
+    console.log("Le joueur est mort !");
   }
 
   _initFly() {
@@ -38,6 +49,7 @@ export class PLayer {
     });
   }
 
+  // Dans le main.js faire en sorte de mettre des + ou - une valeurs pour Y avec de l'inertie
   isFlying() {
     return this.pressedSpace;
   }
