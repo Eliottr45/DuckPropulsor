@@ -1,10 +1,11 @@
 export class PowerUp extends Objects {
-  constructor(x, y, width, height) {
+  constructor(x, y, width, height, power) {
     super();
     this.x = x;
     this.y = y;
     this.width = width;
     this.height = height;
+    this.power = null;
   }
 
   onCollide(player) {
@@ -22,5 +23,20 @@ export class PowerUp extends Objects {
       return true;
     }
     return false;
+  }
+
+  action() {
+    if (this.power === "invicible") {
+      // bouclier qui protège contre les obstacles
+    }
+    if (this.power === "aimant") {
+      // attire toute les piéces environnante vers le player
+    }
+    if (this.power === "noObstacles") {
+      // stopper l'apparition des obstacles
+    }
+    if (this.power === "boost") {
+      //incrémentation rapide du score plus effet de de distorsion pour mimer le boost
+    }
   }
 }
