@@ -17,15 +17,13 @@ export class Coins extends Objects {
     return Math.random() * (max - min) + min;
   }
 
-  // ! a terminer !
-  destroy(player) {
-    if (this.onCollide(player)) {
-      // this.#coordY = 300;
-      const temp = window.innerWidth * 2;
-      const x = this.getRandomNumber(window.innerWidth, temp);
-      const y = this.getRandomNumber(100, window.innerHeight) - 100;
-      this.setPositionX(x);
-      this.setPositionY(y);
-    }
+  destroy() {
+    // On définit une nouvelle position aléatoire à droite
+    const newX = window.innerWidth + this.getRandomNumber(100, 500);
+    const newY = this.getRandomNumber(100, window.innerHeight - 100);
+
+    // On utilise les méthodes de la classe Objects pour mettre à jour
+    this.setPositionX(newX);
+    this.setPositionY(newY);
   }
 }
