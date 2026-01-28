@@ -1,8 +1,8 @@
 import { Objects } from "./Objects.js";
 export class Coins extends Objects {
   #coins;
-  constructor() {
-    super();
+  constructor(x, y, width, height) {
+    super(x, y, width, height);
     this.coins = 0;
   }
 
@@ -16,5 +16,6 @@ export class Coins extends Objects {
 
   action(player) {
     this.coins += 1;
+    console.log("Coin ramassée ! Total : " + this.coins);
   }
 }

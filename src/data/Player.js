@@ -1,5 +1,5 @@
 // création d'une classe
-export class Personnage {
+export class PLayer {
   #coordX;
   #coordY;
   #width;

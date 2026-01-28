@@ -26,19 +26,6 @@ export class Objects {
     );
   }
 
-  //affichage de la hitbox dans le canvas
-  spritehitbox() {
-    const canvas = document.getElementById("game");
-    const ctx = canvas.getContext("2d");
-    hitBox(ctx);
-  }
-
-  spriteasset() {
-    const canvas = document.getElementById("game");
-    const ctx = canvas.getContext("2d");
-    insertasset(ctx);
-  }
-
   //déplacement de la hitbox
   deplacement(classObjet) {
     const track = document.querySelector(`.${classObjet}`);
