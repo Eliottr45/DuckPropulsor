@@ -30,12 +30,13 @@ export class Player {
     return this.#coordY;
   }
 
+  // player.js
   getEndCoordX() {
-    return this.#endCoordX;
+    return this.#coordX + this.#width; // Calculer en direct
   }
 
   getEndCoordY() {
-    return this.#endCoordY;
+    return this.#coordY + this.#height; // Calculer en direct
   }
 
   update() {

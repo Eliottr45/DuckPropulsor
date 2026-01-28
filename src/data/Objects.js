@@ -11,12 +11,17 @@ export class Objects {
     this.#height = height;
   }
 
-  setPostionX(coordX) {
-    this.#coordX = coordX;
+  setPositionX(val) {
+    this.#coordX = val;
   }
 
-  setPostionY(coordY) {
-    this.#coordY = coordY;
+  setPositionY(val) {
+    this.#coordY = val;
+  }
+
+  // Getter utile pour savoir où est l'objet
+  getCoordX() {
+    return this.#coordX;
   }
 
   getRandomNumber(min, max) {
@@ -79,21 +84,26 @@ export class Objects {
   //collision de la hitbox
   // On passe directement l'instance de la classe Player (player)
   onCollide(player) {
-    // instance de la class player
-    const endX = this.#coordX + this.#width;
-    const endY = this.#coordY + this.#height;
-    const playerX = player.getCoordX();
-    const playerY = player.getCoordY();
-    const playerEndX = player.getEndCoordX();
-    const playerEndY = player.getEndCoordY();
-    if (
-      playerX <= endX &&
-      playerEndX >= this.#coordX &&
-      playerEndY >= this.#coordY &&
-      playerY <= endY
-    ) {
-      return true;
-    }
-    return false;
+    // 1. Définir les bords de l'obstacle (this)
+    const obstacleLeft = this.#coordX;
+    const obstacleRight = this.#coordX + this.#width;
+    const obstacleTop = this.#coordY;
+    const obstacleBottom = this.#coordY + this.#height;
+
+    // 2. Définir les bords du joueur (via ses getters/méthodes)
+    const playerLeft = player.getCoordX();
+    const playerRight = player.getEndCoordX();
+    const playerTop = player.getCoordY();
+    const playerBottom = player.getEndCoordY();
+
+    // 3. Logique de collision AABB (Axis-Aligned Bounding Box)
+    // On vérifie si les rectangles se chevauchent
+    const isColliding =
+      playerLeft < obstacleRight &&
+      playerRight > obstacleLeft &&
+      playerTop < obstacleBottom &&
+      playerBottom > obstacleTop;
+
+    return isColliding;
   }
 }

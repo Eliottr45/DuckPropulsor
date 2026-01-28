@@ -86,17 +86,20 @@ let score = `Score coins : ${coinsvalue}`;
 const compteurp = document.getElementById("compteur-coins");
 compteurp.textContent = score;
 
+// main.js
 function checkCollisions(player) {
   tableCoins.forEach((coin) => {
     if (coin.onCollide(player)) {
+      // 1. Incrémenter le score
       coinsvalue += 1;
-      coin.collected = true;
-      coin.destroy(player);
-      score = `Score coins: ${coinsvalue}`;
 
-      const affichageScore = document.getElementById("compteur-coins");
-      if (compteurp) {
-        compteurp.textContent = score;
+      // 2. Téléporter la pièce immédiatement
+      coin.destroy();
+
+      // 3. Mettre à jour l'affichage
+      const compteur = document.getElementById("compteur-coins");
+      if (compteur) {
+        compteur.textContent = `Score coins: ${coinsvalue}`;
       }
     }
   });
