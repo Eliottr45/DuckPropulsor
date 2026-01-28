@@ -92,7 +92,7 @@ function createElements(container) {
   track.innerHTML += track.innerHTML;
 
   let position = 0;
-  const speed = 200; // Pixels par seconde
+  const speed = 285; // Pixels par seconde
   let lastTimestamp = 0;
 
   function animate(timestamp) {
@@ -112,7 +112,19 @@ function createElements(container) {
   }
   // Lancement de l'animation
   requestAnimationFrame(animate);
+
+  // ! Création du compteur de pièces
+  const compteurdiv = document.createElement(div);
+  const compteurp = document.createElement(p);
+  sectionHomePage.append(compteurdiv);
+  compteurdiv.append(compteurp);
 }
+
+//créer une div et un p dans le body
+//append  div et p
+//créer la variable compteur en la faisant commencer par 0
+//insérer un texte initial dans le p avec compteur en variable pour le score
+//faire en sorte qu'à la collision entre player et la pièce ça ajoute 1 au compteur
 
 function attachEvent() {
   const buttonPlay = document.getElementById("play");
