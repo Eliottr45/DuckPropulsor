@@ -11,6 +11,14 @@ export class Objects {
     this.#height = height;
   }
 
+  setPostionX(coordX) {
+    this.#coordX = coordX;
+  }
+
+  setPostionY(coordY) {
+    this.#coordY = coordY;
+  }
+
   getRandomNumber(min, max) {
     return Math.random() * (max - min) + min;
   }
@@ -21,7 +29,7 @@ export class Objects {
       // this.#coordY = 300;
       const temp = window.innerWidth * 2;
       this.#coordX = this.getRandomNumber(window.innerWidth, temp);
-      this.#coordY = this.getRandomNumber(0, window.innerHeight) - 100;
+      this.#coordY = this.getRandomNumber(100, window.innerHeight) - 100;
     }
   }
 
@@ -69,15 +77,20 @@ export class Objects {
   }
 
   //collision de la hitbox
-  onCollide(persoHitbox) {
-    //persoHitbox = {persoX: 50, persoY: 50, endPersoX: 100 --> startX + width, endPersoY: 100 --> startY + height}
+  // On passe directement l'instance de la classe Player (player)
+  onCollide(player) {
+    // instance de la class player
     const endX = this.#coordX + this.#width;
     const endY = this.#coordY + this.#height;
+    const playerX = player.getCoordX();
+    const playerY = player.getCoordY();
+    const playerEndX = player.getEndCoordX();
+    const playerEndY = player.getEndCoordY();
     if (
-      persoHitbox.persoX < endX &&
-      persoHitbox.endPersoX > this.#coordX &&
-      persoHitbox.endPersoY > this.#coordY &&
-      persoHitbox.persoY < endY
+      playerX <= endX &&
+      playerEndX >= this.#coordX &&
+      playerEndY >= this.#coordY &&
+      playerY <= endY
     ) {
       return true;
     }
