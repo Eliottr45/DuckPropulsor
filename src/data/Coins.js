@@ -7,6 +7,10 @@ export class Coins extends Objects {
     this.#coins = 0;
   }
 
+  getCoin() {
+    return this.#coins;
+  }
+
   getRandomNumber(min, max) {
     return Math.random() * (max - min) + min;
   }
