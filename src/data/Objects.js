@@ -11,6 +11,19 @@ export class Objects {
     this.#height = height;
   }
 
+  getRandomNumber(min, max) {
+    return Math.random() * (max - min) + min;
+  }
+
+  moveLeft(speed) {
+    this.#coordX -= speed;
+    if (this.#coordX + this.#width < 0) {
+      const temp = window.innerWidth * 2;
+      this.#coordX = this.getRandomNumber(window.innerWidth, temp);
+      this.#coordY = this.getRandomNumber(0, window.innerHeight);
+    }
+  }
+
   // création de la hitbox
   hitBox(ctx) {
     ctx.fillRect(this.#coordX, this.#coordY, this.#width, this.#height);

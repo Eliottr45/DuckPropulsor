@@ -24,76 +24,72 @@ function getContext() {
   return ctx;
 }
 
+function getRandomNumber(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
 const canvas = getCanvas();
 const ctx = getContext();
-const coins = new Coins(50, 50, 50, 50);
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
+const coins = new Coins(
+  canvas.width + getRandomNumber(0, canvas.width),
+  getRandomNumber(0, canvas.height),
+  50,
+  50,
+);
+const coins2 = new Coins(
+  canvas.width + getRandomNumber(0, canvas.width),
+  getRandomNumber(0, canvas.height),
+  50,
+  50,
+);
+const coins3 = new Coins(
+  canvas.width + getRandomNumber(0, canvas.width),
+  getRandomNumber(0, canvas.height),
+  50,
+  50,
+);
+const coins4 = new Coins(
+  canvas.width + getRandomNumber(0, canvas.width),
+  getRandomNumber(0, canvas.height),
+  50,
+  50,
+);
+
+// deplacement();
 ctx.fillStyle = "purple";
 coins.hitBox(ctx);
+coins2.hitBox(ctx);
+coins3.hitBox(ctx);
+coins4.hitBox(ctx);
 
 const image = new Image();
 image.src = monImage;
 
 image.onload = () => {
   coins.insertasset(image, ctx);
+  coins2.insertasset(image, ctx);
+  coins3.insertasset(image, ctx);
+  coins4.insertasset(image, ctx);
 };
-
-// function moveSquare() {
-//   if (keysPressed.ArrowUp || keysPressed.z) squareY -= speed;
-//   if (keysPressed.ArrowDown || keysPressed.s) squareY += speed;
-//   if (keysPressed.ArrowLeft || keysPressed.q) squareX -= speed;
-//   if (keysPressed.ArrowRight || keysPressed.d) squareX += speed;
-
-//   if (keysPressed.space) squareX += speed;
-
-//   squareX = Math.max(0, Math.min(squareX, canvas.width - squareSize));
-//   squareY = Math.max(0, Math.min(squareY, canvas.height - squareSize));
-// }
-
-// function updateGame() {
-//   const ctx = getContext();
-//   ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-//   drawSquare();
-//   moveSquare();
-// }
-// updateGame();
-
-//
-//
-//
-//
-//
 
 init(container);
 
-// function clear() {
-//   const canvas = document.getElementById("canvas");
-//   const ctx = canvas.getContext("2d");
-//   ctx.clearRect(0, 0, canvas.width, canvas.height);
-// }
+function gameLoop() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-// function update() {
-//   // mise a jour de toute les coordonnées de tout les objets présent sur le canva (player/obstacles/coins)
-// }
+  coins.moveLeft(4);
+  coins2.moveLeft(4);
+  coins3.moveLeft(4);
+  coins4.moveLeft(4);
 
-// function draw() {
-//   //affichage de tout les objets avec les nouvelles position set après le update
-// }
+  coins.insertasset(image, ctx);
+  coins2.insertasset(image, ctx);
+  coins3.insertasset(image, ctx);
+  coins4.insertasset(image, ctx);
 
-// function gameLoop() {
-//   // dessin de tout les objets
-//   clear();
+  requestAnimationFrame(gameLoop);
+}
 
-//   update();
-
-//   draw();
-
-//   // condition qui verifie si le player est toujours vivant
-//   if (1 === 1) {
-//     requestAnimationFrame(gameLoop);
-//   }
-// }
-
-// gameLoop();
+gameLoop();
