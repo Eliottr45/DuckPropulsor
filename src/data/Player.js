@@ -5,6 +5,7 @@ export class PLayer {
   #width;
   #height;
   #alive;
+  #velocity;
 
   constructor(coordX, coordY, width, height) {
     this.#coordX = coordX;
@@ -13,7 +14,37 @@ export class PLayer {
     this.#height = height;
     this.pressedSpace = false;
     this.#alive = true;
+    this.#velocity = 0;
     this._initFly();
+  }
+
+  update() {
+    if (!this.#alive) return;
+
+    const gravity = 0.5;
+    const jetpackPower = 0.9;
+
+    this.#velocity += gravity;
+
+    if (this.pressedSpace) {
+      this.#velocity -= jetpackPower;
+    }
+
+    if (this.#velocity > 10) this.#velocity = 10;
+    if (this.#velocity < -10) this.#velocity = -10;
+
+    this.#coordY += this.#velocity;
+
+    if (this.#coordY < 0) {
+      this.#coordY = 0;
+      this.#velocity = 0;
+    }
+
+    const gameHeight = document.getElementById("game").height;
+    if (this.#coordY + this.#height > gameHeight) {
+      this.#coordY = gameHeight - this.#height;
+      this.#velocity = 0;
+    }
   }
 
   // fonction qui permet de récupérer les données de player sous forme de tableau
@@ -38,6 +69,7 @@ export class PLayer {
   _initFly() {
     document.addEventListener("keydown", (event) => {
       if (event.code === "Space") {
+        event.preventDefault();
         this.pressedSpace = true;
       }
     });
