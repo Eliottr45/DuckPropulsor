@@ -55,7 +55,7 @@ export class PLayer {
   }
 
   hitBox(ctx) {
-    ctx.fillStyle = "blue";
+    ctx.fillStyle = "green";
     ctx.fillRect(this.#coordX, this.#coordY, this.#width, this.#height);
   }
 
@@ -63,5 +63,15 @@ export class PLayer {
     const canvas = document.getElementById("game");
     const ctx = canvas.getContext("2d");
     hitBox(ctx);
+  }
+
+  insertPlayerImg(pathimage, ctx) {
+    ctx.drawImage(
+      pathimage,
+      this.#coordX,
+      this.#coordY,
+      this.#width,
+      this.#height,
+    );
   }
 }
