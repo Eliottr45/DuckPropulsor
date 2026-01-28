@@ -3,10 +3,11 @@ import { init } from "./display/interactions.js";
 import { Coins } from "./data/Coins.js";
 import monImage from "./assets/coins.png";
 import imagePlayer from "./assets/player.png";
-
-import { PLayer } from "./data/player.js";
+import { Player } from "./data/player.js";
 
 const container = document.body;
+
+init(container);
 
 function getCanvas() {
   const canvas = document.getElementById("game");
@@ -37,36 +38,36 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 const coins = new Coins(
   canvas.width + getRandomNumber(0, canvas.width),
-  getRandomNumber(0, canvas.height - 100),
+  getRandomNumber(100, canvas.height - 100),
   50,
   50,
 );
 const coins2 = new Coins(
   canvas.width + getRandomNumber(0, canvas.width),
-  getRandomNumber(0, canvas.height - 100),
+  getRandomNumber(100, canvas.height - 100),
   50,
   50,
 );
 const coins3 = new Coins(
   canvas.width + getRandomNumber(0, canvas.width),
-  getRandomNumber(0, canvas.height - 100),
+  getRandomNumber(100, canvas.height - 100),
   50,
   50,
 );
 const coins4 = new Coins(
   canvas.width + getRandomNumber(0, canvas.width),
-  getRandomNumber(0, canvas.height - 100),
+  getRandomNumber(100, canvas.height - 100),
   50,
   50,
 );
 const coins5 = new Coins(
   canvas.width + getRandomNumber(0, canvas.width),
-  getRandomNumber(0, canvas.height - 100),
+  getRandomNumber(100, canvas.height - 100),
   50,
   50,
 );
 
-const player = new PLayer(500, 300, 100, 100);
+const player = new Player(500, 300, 100, 100);
 player.hitBox(ctx);
 
 // deplacement();
@@ -77,37 +78,59 @@ image.src = monImage;
 const imageJoueur = new Image();
 imageJoueur.src = imagePlayer;
 
-init(container);
+const tableCoins = [coins, coins2, coins3, coins4, coins5];
 
-function gameLoop() {
-  console.log(coins);
-  // coins.update(player, compteurp, speed);
+let coinsvalue = 0;
+let score = `Score coins : ${coinsvalue}`;
+
+const compteurp = document.getElementById("compteur-coins");
+compteurp.textContent = score;
+
+function checkCollisions(player) {
+  tableCoins.forEach((coin) => {
+    if (coin.onCollide(player)) {
+      coinsvalue += 1;
+      coin.collected = true;
+      coin.destroy(player);
+      score = `Score coins: ${coinsvalue}`;
+
+      const affichageScore = document.getElementById("compteur-coins");
+      if (compteurp) {
+        compteurp.textContent = score;
+      }
+    }
+  });
+}
+
+function gameLoop(player) {
+  player.update();
+
+  tableCoins.forEach((coin) => {
+    coin.moveLeft(2);
+  });
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  coins.moveLeft(2);
-  coins2.moveLeft(2);
-  coins3.moveLeft(2);
-  coins4.moveLeft(2);
-  coins5.moveLeft(2);
+  checkCollisions(player);
 
   ctx.fillStyle = "red";
-  coins.hitBox(ctx);
-  coins2.hitBox(ctx);
-  coins3.hitBox(ctx);
-  coins4.hitBox(ctx);
-  coins5.hitBox(ctx);
-  player.hitBox(ctx);
 
-  coins.insertasset(image, ctx);
-  coins2.insertasset(image, ctx);
-  coins3.insertasset(image, ctx);
-  coins4.insertasset(image, ctx);
-  coins5.insertasset(image, ctx);
+  tableCoins.forEach((coin) => {
+    // Affichage de la hitbox (debug)
+    coin.hitBox(ctx);
+    // Affichage de l'image de la pièce
+    coin.insertasset(image, ctx);
+  });
+
+  player.hitBox(ctx);
 
   player.insertPlayerImg(imageJoueur, ctx);
 
-  requestAnimationFrame(gameLoop);
+  if (player.getAlive()) {
+    requestAnimationFrame(() => gameLoop(player));
+  } else {
+    console.log("Game Over");
+  }
 }
 
-gameLoop();
+gameLoop(player);
