@@ -7,15 +7,21 @@ export class Obstacles extends Objects {
     this.height = height;
   }
 
+  // faire passer en paramètres une instance de la class player
   onCollide(player) {
+    if (!player.isAlive) return false;
+
+    // récupération des position du player a travers un tableau des données du player
+    const playerBounds = player.getBounds();
     return (
-      this.x <= player.x + player.width &&
-      this.x + this.width >= player.x &&
-      this.y <= player.y + player.height &&
-      this.y + this.height >= player.y
+      this.x <= playerBounds.endX &&
+      this.x + this.width >= playerBounds.startX &&
+      this.y <= playerBounds.endY &&
+      this.y + this.height >= playerBounds.startY
     );
   }
 
+  // faire passer en paramètres une instance de la class player
   update(player) {
     if (this.onCollide(player)) {
       this.action(player);
@@ -24,5 +30,8 @@ export class Obstacles extends Objects {
     return false;
   }
 
-  action() {}
+  // ajout d'une condition dans le main.js if(player.getAlive === false){end of game}
+  action(player) {
+    player.die();
+  }
 }
