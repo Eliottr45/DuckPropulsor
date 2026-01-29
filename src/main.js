@@ -207,18 +207,19 @@ function totalScore(coin, cointotal, distance, meilleurdistance) {
   }
 }
 
-function coinObstacleCollide(coin, tabObstacles) {
-  tabObstacles.forEach((obstacle) => {
+function coinObstacleCollide(coin, tabElt) {
+  tabElt.forEach((element) => {
+    if (element === coin) return;
     let newX = coin.getCoordX();
     const coinWidth = coin.getWidth();
     const coinHeight = coin.getHeight();
     const coinY = coin.getCoordY();
 
     while (
-      newX < obstacle.getCoordX() + obstacle.getWidth() &&
-      newX + coinWidth > obstacle.getCoordX() &&
-      coinY < obstacle.getCoordY() + obstacle.getHeight() &&
-      coinY + coinHeight > obstacle.getCoordY()
+      newX < element.getCoordX() + element.getWidth() &&
+      newX + coinWidth > element.getCoordX() &&
+      coinY < element.getCoordY() + element.getHeight() &&
+      coinY + coinHeight > element.getCoordY()
     ) {
       newX += 100;
     }
@@ -299,6 +300,7 @@ function gameLoop(player) {
     tableCoins.forEach((coin) => {
       coin.moveLeft(2);
       coinObstacleCollide(coin, tableObstacles);
+      coinObstacleCollide(coin, tableCoins);
     });
 
     // On déplace chaque obstacles vers la gauche
@@ -313,6 +315,7 @@ function gameLoop(player) {
 
     tableCoins.forEach((coin) => {
       // Affichage de la hitbox (debug)
+      coinObstacleCollide(coin, tableCoins);
       coin.hitBox(ctx);
       coin.insertasset(image, ctx);
     });
