@@ -1,4 +1,7 @@
-export function init(container) {
+let checkPauseFn;
+
+export function init(container, checkPause) {
+  checkPauseFn = checkPause;
   createElements(container);
   attachEvent();
 }
@@ -169,19 +172,22 @@ function createElements(container) {
   const speed = 285; // Pixels par seconde
   let lastTimestamp = 0;
 
+  // DuckPropulsor/src/display/interactions.js
+
   function animate(timestamp) {
-    // Calcul du temps écoulé entre deux frames (delta time)
-    if (!lastTimestamp) lastTimestamp = timestamp;
-    const deltaTime = (timestamp - lastTimestamp) / 1000; // en secondes
-    lastTimestamp = timestamp;
-    // Mise à jour de la position basée sur le temps réel
-    position -= speed * deltaTime;
-    // Réinitialisation si on a défilé la moitié du contenu
-    if (Math.abs(position) >= track.scrollWidth / 2) {
-      position = 0;
+    const currentlyPaused = checkPauseFn ? checkPauseFn() : false;
+    if (!currentlyPaused) {
+      if (!lastTimestamp) lastTimestamp = timestamp;
+      const deltaTime = (timestamp - lastTimestamp) / 1000;
+      lastTimestamp = timestamp;
+      position -= speed * deltaTime;
+      if (Math.abs(position) >= track.scrollWidth / 2) {
+        position = 0;
+      }
+      track.style.transform = `translateX(${position}px)`;
+    } else {
+      lastTimestamp = 0;
     }
-    track.style.transform = `translateX(${position}px)`;
-    // On demande la frame suivante
     requestAnimationFrame(animate);
   }
   // Lancement de l'animation
@@ -238,19 +244,24 @@ function attachEvent() {
   //   playAgain();
   // });
 
+  // src/display/interactions.js
+
   const buttonGoHome = document.getElementById("buttonGoHomePage");
   buttonGoHome.addEventListener("click", () => {
     homePage.style.display = "block";
     GameOverPage.style.display = "none";
 
-    let scorestorage = parseInt(localStorage.getItem("Scoretotalcoin"));
-    let scoremeilleurdistance = localStorage.getItem("meilleurdistance");
+    // Ajoutez "|| 0" pour gérer le cas où c'est vide/null
+    let scorestorage = parseInt(localStorage.getItem("Scoretotalcoin")) || 0;
+    let scoremeilleurdistance =
+      parseInt(localStorage.getItem("meilleurdistance")) || 0;
 
     let scoreCoinTotal = `Total des pièces en stock ${scorestorage}`;
-    let scoreMeilleurDistance = `Meilleure distance parcourue ${scoremeilleurdistance}`;
+    let scoreMeilleurDistance = `Meilleure distance parcourue ${scoremeilleurdistance + 1}`;
+
     const cointotal = document.getElementById("coin-total");
-    console.log(scoreCoinTotal);
     const meilleuredistance = document.getElementById("meilleure-distance");
+
     cointotal.textContent = scoreCoinTotal;
     meilleuredistance.textContent = scoreMeilleurDistance;
   });

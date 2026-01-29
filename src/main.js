@@ -9,7 +9,9 @@ import { Obstacles } from "./data/Obstacles.js";
 const container = document.body;
 let playerMoveUpdateInterval;
 
-init(container);
+let ispaused = false;
+
+init(container, () => ispaused);
 
 function getCanvas() {
   const canvas = document.getElementById("game");
@@ -109,35 +111,6 @@ const tableObstacles = [
     400,
   ),
 ];
-// const obstacles = new Obstacles(
-//   canvas.width + getRandomNumber(0, canvas.width),
-//   canvas.height / 3 - 25,
-//   400,
-//   50,
-// );
-
-// const obstacles2 = new Obstacles(
-//   canvas.width + getRandomNumber(0, canvas.width),
-//   canvas.height / 2 - 75,
-//   50,
-//   150,
-// );
-
-// const obstacles3 = new Obstacles(
-//   canvas.width + getRandomNumber(0, canvas.width),
-//   canvas.height / 4 - 100,
-//   50,
-//   200,
-// );
-
-// const obstacles4 = new Obstacles(
-//   canvas.width + getRandomNumber(0, canvas.width),
-//   canvas.height / 2,
-//   400,
-//   50,
-// );
-
-// Faire en sorte que le spawn et le respawn des pièces ne se superpose pas avec les obstacles
 
 // instanciation des coins
 const coins = new Coins(
@@ -183,9 +156,6 @@ image.src = monImage;
 const imageJoueur = new Image();
 imageJoueur.src = imagePlayer;
 
-// Liste de tout les obstacles
-// const tableObstacles = [obstacles, obstacles2, obstacles3, obstacles4];
-
 // Liste de toutes les pièces
 const tableCoins = [coins, coins2, coins3, coins4, coins5];
 
@@ -198,12 +168,16 @@ let scoremeilleurdistance =
 const compteurp = document.getElementById("compteur-coins");
 compteurp.textContent = score;
 
-function totalScore(coin, cointotal, distance, meilleurdistance) {
+// src/main.js
+
+function totalScore(coin, cointotal, ancienRecord, distanceActuelle) {
+  // Mise à jour du total des pièces
   cointotal += coin;
   localStorage.setItem("Scoretotalcoin", cointotal);
 
-  if (distance > meilleurdistance) {
-    meilleurdistance = localStorage.setItem("meilleurdistance", distance);
+  // Si la distance actuelle est supérieure à l'ancien record, on met à jour
+  if (distanceActuelle > ancienRecord) {
+    localStorage.setItem("meilleurdistance", distanceActuelle);
   }
 }
 
@@ -267,15 +241,14 @@ buttonPlay.addEventListener("click", () => {
 
 function affichageScore() {
   const now = performance.now();
-  scoreDistance += (now - lastTime) * 0.01;
+  if (!ispaused) {
+    scoreDistance += (now - lastTime) * 0.01;
+    document.getElementById("score-coins").textContent =
+      Math.floor(scoreDistance);
+  }
   lastTime = now;
-
-  document.getElementById("score-coins").textContent =
-    Math.floor(scoreDistance);
-
   requestAnimationFrame(affichageScore);
 }
-let ispaused = false;
 
 document.addEventListener("keydown", (e) => {
   if (e.key.toLowerCase() === "p") {
@@ -371,7 +344,6 @@ function gameLoop(player) {
 
     let scoreCoinFinal = `Votre score de pièce ${coinsvalue}`;
     let scoreDistanceFinal = `Distance parcourue ${Math.round(scoreDistance)}`;
-    scoreDistance = 0;
     const coin = document.getElementById("coin");
     const distance = document.getElementById("distance");
     coin.textContent = scoreCoinFinal;
@@ -380,8 +352,10 @@ function gameLoop(player) {
     //Ajout dans le localstorage le score total des pièces + le meilleur score de la distance
     totalScore(coinsvalue, scorestorage, scoremeilleurdistance, scoreDistance);
     scorestorage = localStorage.getItem("Scoretotalcoin");
-    scoremeilleurdistance = localStorage.getItem("meilleurdistance");
+    scoremeilleurdistance =
+      parseInt(localStorage.getItem("meilleurdistance")) || 0;
     console.log(scorestorage);
+    scoreDistance = 0;
 
     //Affichage des meilleurs résultats à la page d'accueil
 
