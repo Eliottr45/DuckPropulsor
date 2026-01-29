@@ -24,6 +24,18 @@ export class Objects {
     return this.#coordX;
   }
 
+  getCoordY() {
+    return this.#coordY;
+  }
+
+  getWidth() {
+    return this.#width;
+  }
+
+  getHeight() {
+    return this.#height;
+  }
+
   getRandomNumber(min, max) {
     return Math.random() * (max - min) + min;
   }
