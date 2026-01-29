@@ -337,8 +337,8 @@ function gameLoop(player) {
     canva.style.display = "none";
 
     // ! coinsvalue = 0;
-    // const caca = localStorage.setItem("Scoretotalcoin", 0);
-    // scorestorage = localStorage.getItem(caca);
+    // const resetStorage = localStorage.setItem("Scoretotalcoin", 0);
+    // scorestorage = localStorage.getItem(resetStorage);
 
     //Affichage Résultat score distance et coin de la partie finie au game over
 
