@@ -39,33 +39,102 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 // Il faut modifier la height de chaque obstacle pour le responsive (faire en sorte que la height se calcul par rapport a la height de l'écran de l'utilisateur)
-const obstacles = new Obstacles(
-  canvas.width + getRandomNumber(0, canvas.width),
-  0,
-  50,
-  300,
-);
 
-const obstacles2 = new Obstacles(
-  canvas.width + getRandomNumber(0, canvas.width),
-  canvas.height - 500,
-  50,
-  500,
-);
+// On définit une constante pour l'espacement horizontal entre les obstacles
+const spacing = 600;
 
-const obstacles3 = new Obstacles(
-  canvas.width + getRandomNumber(0, canvas.width),
-  canvas.height / 2 - 100,
-  50,
-  200,
-);
+const tableObstacles = [
+  // 1. Un tunnel de départ (Plafond + Sol)
+  new Obstacles(canvas.width + 500, 0, 400, 50),
+  new Obstacles(canvas.width + 500, canvas.height - 50, 400, 50),
 
-const obstacles4 = new Obstacles(
-  canvas.width + getRandomNumber(0, canvas.width),
-  canvas.height - 50,
-  700,
-  50,
-);
+  // 2. Un mur central (oblige à choisir haut ou bas)
+  new Obstacles(canvas.width + 500 + spacing, canvas.height / 2 - 150, 50, 300),
+
+  // 3. Un escalier montant (3 blocs)
+  new Obstacles(
+    canvas.width + 500 + spacing * 2,
+    canvas.height - 100,
+    100,
+    100,
+  ),
+  new Obstacles(
+    canvas.width + 500 + spacing * 2.3,
+    canvas.height - 200,
+    100,
+    200,
+  ),
+  new Obstacles(
+    canvas.width + 500 + spacing * 2.6,
+    canvas.height - 300,
+    100,
+    300,
+  ),
+
+  // 4. Les "Dents de la mer" (Stalactites en haut)
+  new Obstacles(canvas.width + 500 + spacing * 4, 0, 50, 400),
+  new Obstacles(canvas.width + 500 + spacing * 4.5, 0, 50, 300),
+  new Obstacles(canvas.width + 500 + spacing * 5, 0, 50, 400),
+
+  // 5. Un passage très étroit au milieu
+  new Obstacles(
+    canvas.width + 500 + spacing * 6,
+    0,
+    100,
+    canvas.height / 2 - 100,
+  ),
+  new Obstacles(
+    canvas.width + 500 + spacing * 6,
+    canvas.height / 2 + 100,
+    100,
+    canvas.height / 2,
+  ),
+
+  // 6. Une plateforme flottante longue
+  new Obstacles(
+    canvas.width + 500 + spacing * 7.5,
+    canvas.height / 2 - 25,
+    600,
+    50,
+  ),
+
+  // 7. Le saut final (Murs alternés)
+  new Obstacles(canvas.width + 500 + spacing * 9, canvas.height - 400, 50, 400),
+  new Obstacles(canvas.width + 500 + spacing * 9.5, 0, 50, 400),
+  new Obstacles(
+    canvas.width + 500 + spacing * 10,
+    canvas.height - 400,
+    50,
+    400,
+  ),
+];
+// const obstacles = new Obstacles(
+//   canvas.width + getRandomNumber(0, canvas.width),
+//   canvas.height / 3 - 25,
+//   400,
+//   50,
+// );
+
+// const obstacles2 = new Obstacles(
+//   canvas.width + getRandomNumber(0, canvas.width),
+//   canvas.height / 2 - 75,
+//   50,
+//   150,
+// );
+
+// const obstacles3 = new Obstacles(
+//   canvas.width + getRandomNumber(0, canvas.width),
+//   canvas.height / 4 - 100,
+//   50,
+//   200,
+// );
+
+// const obstacles4 = new Obstacles(
+//   canvas.width + getRandomNumber(0, canvas.width),
+//   canvas.height / 2,
+//   400,
+//   50,
+// );
 
 // Faire en sorte que le spawn et le respawn des pièces ne se superpose pas avec les obstacles
 
@@ -114,7 +183,7 @@ const imageJoueur = new Image();
 imageJoueur.src = imagePlayer;
 
 // Liste de tout les obstacles
-const tableObstacles = [obstacles, obstacles2, obstacles3, obstacles4];
+// const tableObstacles = [obstacles, obstacles2, obstacles3, obstacles4];
 
 // Liste de toutes les pièces
 const tableCoins = [coins, coins2, coins3, coins4, coins5];
@@ -130,6 +199,25 @@ function totalCoins(coin, cointotal) {
   cointotal += coin;
 
   localStorage.setItem("Scoretotalcoin", cointotal);
+}
+
+function coinObstacleCollide(coin, tabObstacles) {
+  tabObstacles.forEach((obstacle) => {
+    let newX = coin.getCoordX();
+    const coinWidth = coin.getWidth();
+    const coinHeight = coin.getHeight();
+    const coinY = coin.getCoordY();
+
+    while (
+      newX < obstacle.getCoordX() + obstacle.getWidth() &&
+      newX + coinWidth > obstacle.getCoordX() &&
+      coinY < obstacle.getCoordY() + obstacle.getHeight() &&
+      coinY + coinHeight > obstacle.getCoordY()
+    ) {
+      newX += 100;
+    }
+    coin.setPositionX(newX);
+  });
 }
 
 // Fonction qui vérifie la collision entre le joueur et un élément du jeu (utilisation de onCollide => class Object)
@@ -188,6 +276,7 @@ function gameLoop(player) {
   // Pour chaque pièces on les déplaces vers la gauche
   tableCoins.forEach((coin) => {
     coin.moveLeft(2);
+    coinObstacleCollide(coin, tableObstacles);
   });
 
   // On déplace chaque obstacles vers la gauche
