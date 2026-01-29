@@ -1,7 +1,5 @@
 // création d'une classe
 export class Player {
-  #endCoordX;
-  #endCoordY;
   #coordX;
   #coordY;
   #width;
@@ -14,8 +12,6 @@ export class Player {
     this.#coordY = coordY;
     this.#width = width;
     this.#height = height;
-    this.#endCoordX = this.#coordX + this.#width;
-    this.#endCoordY = this.#coordY + this.#height;
     this.pressedSpace = false;
     this.#alive = true;
     this.#velocity = 0;

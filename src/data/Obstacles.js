@@ -1,8 +1,10 @@
 import { Objects } from "./Objects.js";
 
 export class Obstacles extends Objects {
+  #startX;
   constructor(coordX, coordY, width, height) {
     super(coordX, coordY, width, height);
+    this.#startX = this.coordX;
   }
 
   update(player) {
@@ -22,20 +24,13 @@ export class Obstacles extends Objects {
   moveLeft(speed) {
     let currentX = this.getCoordX();
     currentX -= speed;
-    this.setPositionX(currentX);
+
+    const levelLength = 7500;
+
     if (currentX + this.getWidth() < 0) {
-      const temp = window.innerWidth * 2;
-      const newX = this.getRandomNumber(window.innerWidth, temp);
-      const canvasHeight = document.getElementById("game").height;
-      const obstacleHeight = this.getHeight();
-
-      const newY = this.getRandomNumber(0, canvasHeight - obstacleHeight);
-
-      this.setPositionX(newX);
-      this.setPositionY(newY);
+      this.setPositionX(currentX + levelLength);
+    } else {
+      this.setPositionX(currentX);
     }
   }
 }
-// while (this.getCoordY + this.getHeight > window.innerHeight) {
-//   this.setPositionY += 10;
-// }
