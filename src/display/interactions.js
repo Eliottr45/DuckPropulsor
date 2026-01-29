@@ -257,7 +257,7 @@ function attachEvent() {
       parseInt(localStorage.getItem("meilleurdistance")) || 0;
 
     let scoreCoinTotal = `Total des pièces en stock ${scorestorage}`;
-    let scoreMeilleurDistance = `Meilleure distance parcourue ${scoremeilleurdistance + 1}`;
+    let scoreMeilleurDistance = `Meilleure distance parcourue ${scoremeilleurdistance}`;
 
     const cointotal = document.getElementById("coin-total");
     const meilleuredistance = document.getElementById("meilleure-distance");
