@@ -192,13 +192,18 @@ let coinsvalue = 0;
 
 let score = `🪙 ${coinsvalue}`;
 let scorestorage = parseInt(localStorage.getItem("Scoretotalcoin")) || 0;
+let scoremeilleurdistance =
+  parseInt(localStorage.getItem("meilleurdistance")) || 0;
 const compteurp = document.getElementById("compteur-coins");
 compteurp.textContent = score;
 
-function totalCoins(coin, cointotal) {
+function totalScore(coin, cointotal, distance, meilleurdistance) {
   cointotal += coin;
-
   localStorage.setItem("Scoretotalcoin", cointotal);
+
+  if (distance > meilleurdistance) {
+    meilleurdistance = localStorage.setItem("meilleurdistance", distance);
+  }
 }
 
 function coinObstacleCollide(coin, tabObstacles) {
@@ -268,46 +273,73 @@ function affichageScore() {
 
   requestAnimationFrame(affichageScore);
 }
+let ispaused = false;
+
+document.addEventListener("keydown", (e) => {
+  if (e.key.toLowerCase() === "p") {
+    ispaused = !ispaused;
+    if (ispaused === false) {
+      boxpause.style.display = "none";
+    } else {
+      boxpause.style.display = "block";
+    }
+  }
+});
+
+const boxpause = document.getElementById("div-pause");
 
 function gameLoop(player) {
   //if( ispaused === false) =>
   // On update la position du joueur (il peut être entrain de voler ou de tomber)
-  player.update();
 
   // Pour chaque pièces on les déplaces vers la gauche
   tableCoins.forEach((coin) => {
     coin.moveLeft(2);
     coinObstacleCollide(coin, tableObstacles);
   });
+  if (ispaused === false) {
+    player.update();
 
-  // On déplace chaque obstacles vers la gauche
-  tableObstacles.forEach((obstacle) => {
-    obstacle.moveLeft(2);
-  });
+    // Pour chaque pièces on les déplaces vers la gauche
+    tableCoins.forEach((coin) => {
+      coin.moveLeft(2);
+    });
 
-  // On clear l'écran de jeu
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // On déplace chaque obstacles vers la gauche
+    tableObstacles.forEach((obstacle) => {
+      obstacle.moveLeft(2);
+    });
 
-  checkCollisions(player);
+    // On clear l'écran de jeu
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  ctx.fillStyle = "red";
+    checkCollisions(player);
 
-  tableCoins.forEach((coin) => {
-    // Affichage de la hitbox (debug)
-    coin.hitBox(ctx);
-    coin.insertasset(image, ctx);
-  });
+    tableCoins.forEach((coin) => {
+      // Affichage de la hitbox (debug)
+      coin.hitBox(ctx);
+      coin.insertasset(image, ctx);
+    });
+    ctx.fillStyle = "red";
 
-  tableObstacles.forEach((obstacle) => {
-    // Affichage de la hitbox (debug)
-    obstacle.hitBox(ctx);
-    // Affichage de l'image de la pièce
-    // coin.insertasset(image, ctx);
-  });
+    tableCoins.forEach((coin) => {
+      // Affichage de la hitbox (debug)
+      coin.hitBox(ctx);
+      // Affichage de l'image de la pièce
+      coin.insertasset(image, ctx);
+    });
 
-  player.hitBox(ctx);
+    tableObstacles.forEach((obstacle) => {
+      // Affichage de la hitbox (debug)
+      obstacle.hitBox(ctx);
+      // Affichage de l'image de la pièce
+      // coin.insertasset(image, ctx);
+    });
 
-  player.insertPlayerImg(imageJoueur, ctx);
+    player.hitBox(ctx);
+
+    player.insertPlayerImg(imageJoueur, ctx);
+  }
 
   // Condition permettant le refresh du jeu toute les 16ms, le jeu s'arrete
   //}
@@ -335,6 +367,30 @@ function gameLoop(player) {
     // ! coinsvalue = 0;
     // const caca = localStorage.setItem("Scoretotalcoin", 0);
     // scorestorage = localStorage.getItem(caca);
+
+    //Affichage Résultat score distance et coin de la partie finie au game over
+
+    let scoreCoinFinal = `Votre score de pièce ${coinsvalue}`;
+    let scoreDistanceFinal = `Distance parcourue ${scoreDistance}`;
+    const coin = document.getElementById("coin");
+    const distance = document.getElementById("distance");
+    coin.textContent = scoreCoinFinal;
+    distance.textContent = scoreDistanceFinal;
+
+    //Ajout dans le localstorage le score total des pièces + le meilleur score de la distance
+    totalScore(coinsvalue, scorestorage, scoremeilleurdistance, scoreDistance);
+    scorestorage = localStorage.getItem("Scoretotalcoin");
+    scoremeilleurdistance = localStorage.getItem("meilleurdistance");
+    console.log(scorestorage);
+
+    //Affichage des meilleurs résultats à la page d'accueil
+
+    let scoreCoinTotal = `Total des pièces en stock ${scorestorage}`;
+    let scoreMeilleurDistance = `Meilleure distance parcourue ${scoremeilleurdistance}`;
+    const cointotal = document.getElementById("coin-total");
+    const meilleuredistance = document.getElementById("meilleure-distance");
+    cointotal.textContent = scoreCoinTotal;
+    meilleuredistance.textContent = scoreMeilleurDistance;
   }
 }
 
