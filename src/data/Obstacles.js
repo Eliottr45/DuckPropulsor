@@ -12,6 +12,20 @@ export class Obstacles extends Objects {
     this.setPositionX(this.#startX);
   }
 
+  hitBox(ctx) {
+    ctx.fillStyle = "red";
+    // Correction : Utilisez les getters car les variables #coordX sont privées dans Objects
+    ctx.fillRect(
+      this.getCoordX(),
+      this.getCoordY(),
+      this.getWidth(),
+      this.getHeight(),
+    );
+
+    // Alternative : Vous pouvez aussi utiliser super.hitBox(ctx) si la méthode du parent dessine déjà le rectangle
+    // super.hitBox(ctx);
+  }
+
   update(player) {
     if (!player.getAlive()) return false;
 

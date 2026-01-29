@@ -289,15 +289,6 @@ function gameLoop(player) {
     tableCoins.forEach((coin) => {
       // Affichage de la hitbox (debug)
       coinObstacleCollide(coin, tableCoins);
-      coin.hitBox(ctx);
-      coin.insertasset(image, ctx);
-    });
-    ctx.fillStyle = "red";
-
-    tableCoins.forEach((coin) => {
-      // Affichage de la hitbox (debug)
-      coin.hitBox(ctx);
-      // Affichage de l'image de la pièce
       coin.insertasset(image, ctx);
     });
 
@@ -328,7 +319,7 @@ function gameLoop(player) {
     const canvas = document.getElementById("game");
     canvas.style.backgroundColor = "transparent";
     playPage.style.display = "none";
-    GameOverPage.style.display = "block";
+    GameOverPage.style.display = "flex";
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     scorestorage = parseInt(localStorage.getItem("Scoretotalcoin"));
     console.log(scorestorage);
@@ -342,8 +333,8 @@ function gameLoop(player) {
 
     //Affichage Résultat score distance et coin de la partie finie au game over
 
-    let scoreCoinFinal = `Votre score de pièce ${coinsvalue}`;
-    let scoreDistanceFinal = `Distance parcourue ${Math.round(scoreDistance)}`;
+    let scoreCoinFinal = `Votre score de pièce : ${coinsvalue}`;
+    let scoreDistanceFinal = `Distance parcourue : ${Math.round(scoreDistance)}`;
     const coin = document.getElementById("coin");
     const distance = document.getElementById("distance");
     coin.textContent = scoreCoinFinal;
@@ -369,8 +360,8 @@ function gameLoop(player) {
   }
 }
 
-let scoreCoinTotal = `Total des pièces en stock ${scorestorage}`;
-let scoreMeilleurDistance = `Meilleure distance parcourue ${scoremeilleurdistance}`;
+let scoreCoinTotal = `Total des pièces en stock : ${scorestorage}`;
+let scoreMeilleurDistance = `Meilleure distance parcourue : ${scoremeilleurdistance}`;
 const cointotal = document.getElementById("coin-total");
 console.log(scoreCoinTotal);
 const meilleuredistance = document.getElementById("meilleure-distance");

@@ -151,7 +151,7 @@ export class Player {
   }
 
   hitBox(ctx) {
-    ctx.fillStyle = "green";
+    ctx.fillStyle = "transparent";
     ctx.fillRect(this.#coordX, this.#coordY, this.#width, this.#height);
   }
 

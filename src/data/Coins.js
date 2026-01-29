@@ -7,6 +7,12 @@ export class Coins extends Objects {
     this.#collected = false;
   }
 
+  hitBox(ctx) {
+    // On ne dessine rien pour les pièces
+    ctx.fillStyle = "transparent";
+    ctx.fillRect(this.coordX, this.coordY, this.width, this.height);
+  }
+
   getRandomNumber(min, max) {
     return Math.random() * (max - min) + min;
   }

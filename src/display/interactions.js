@@ -226,7 +226,7 @@ function attachEvent() {
 
   const buttonBackSkin = document.getElementById("btn-back-skin");
   buttonBackSkin.addEventListener("click", () => {
-    homePage.style.display = "block";
+    homePage.style.display = "flex";
     skin.style.display = "none";
   });
 
@@ -248,7 +248,7 @@ function attachEvent() {
 
   const buttonGoHome = document.getElementById("buttonGoHomePage");
   buttonGoHome.addEventListener("click", () => {
-    homePage.style.display = "block";
+    homePage.style.display = "flex";
     GameOverPage.style.display = "none";
 
     // Ajoutez "|| 0" pour gérer le cas où c'est vide/null
