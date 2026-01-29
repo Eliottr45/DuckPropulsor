@@ -8,7 +8,7 @@ export class Obstacles extends Objects {
   }
 
   resetToDefault() {
-    console.log("Resetting to:", this.#startX);
+    // console.log("Resetting to:", this.#startX);
     this.setPositionX(this.#startX);
   }
 
