@@ -37,31 +37,27 @@ const canvas = getCanvas();
 const ctx = getContext();
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
+positionObstaclesX = canvas.width + getRandomNumber(0, canvas.width);
 
 // Il faut modifier la height de chaque obstacle pour le responsive (faire en sorte que la height se calcul par rapport a la height de l'écran de l'utilisateur)
-const obstacles = new Obstacles(
-  canvas.width + getRandomNumber(0, canvas.width),
-  0,
-  50,
-  300,
-);
+const obstacles = new Obstacles(positionObstaclesX, 0, 50, 300);
 
 const obstacles2 = new Obstacles(
-  canvas.width + getRandomNumber(0, canvas.width),
+  positionObstaclesX,
   canvas.height - 500,
   50,
   500,
 );
 
 const obstacles3 = new Obstacles(
-  canvas.width + getRandomNumber(0, canvas.width),
+  positionObstaclesX,
   canvas.height / 2 - 100,
   50,
   200,
 );
 
 const obstacles4 = new Obstacles(
-  canvas.width + getRandomNumber(0, canvas.width),
+  positionObstaclesX,
   canvas.height - 50,
   700,
   50,
@@ -71,31 +67,31 @@ const obstacles4 = new Obstacles(
 
 // instanciation des coins
 const coins = new Coins(
-  canvas.width + getRandomNumber(0, canvas.width),
+  positionObstaclesX,
   getRandomNumber(100, canvas.height - 100),
   50,
   50,
 );
 const coins2 = new Coins(
-  canvas.width + getRandomNumber(0, canvas.width),
+  positionObstaclesX,
   getRandomNumber(100, canvas.height - 100),
   50,
   50,
 );
 const coins3 = new Coins(
-  canvas.width + getRandomNumber(0, canvas.width),
+  positionObstaclesX,
   getRandomNumber(100, canvas.height - 100),
   50,
   50,
 );
 const coins4 = new Coins(
-  canvas.width + getRandomNumber(0, canvas.width),
+  positionObstaclesX,
   getRandomNumber(100, canvas.height - 100),
   50,
   50,
 );
 const coins5 = new Coins(
-  canvas.width + getRandomNumber(0, canvas.width),
+  positionObstaclesX,
   getRandomNumber(100, canvas.height - 100),
   50,
   50,
@@ -150,7 +146,7 @@ function checkCollisions(player) {
     }
   });
 
-  let scoree = 0;
+  let scoreDistance = 0;
   let lastTime = 2;
 
   const buttonPlay = document.getElementById("play");
@@ -162,10 +158,11 @@ function checkCollisions(player) {
 
   function affichageScore() {
     const now = performance.now();
-    scoree += (now - lastTime) * 0.01;
+    scoreDistance += (now - lastTime) * 0.01;
     lastTime = now;
 
-    document.getElementById("score-coins").textContent = Math.floor(scoree);
+    document.getElementById("score-coins").textContent =
+      Math.floor(scoreDistance);
 
     requestAnimationFrame(affichageScore);
   }
