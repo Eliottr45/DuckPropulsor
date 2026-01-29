@@ -39,7 +39,11 @@ function createElements(container) {
   compteurdiv.classList.add("counter");
   const compteurp = document.createElement("p");
   compteurp.setAttribute("id", "compteur-coins");
-  // ? compteurp.textContent = "score";
+
+  const scoreDiv = document.createElement("div");
+  scoreDiv.classList.add("score");
+  const scorep = document.createElement("p");
+  scorep.setAttribute("id", "score-coins");
 
   const divTrack = document.createElement("div");
   divTrack.classList.add("track");
@@ -61,7 +65,8 @@ function createElements(container) {
   divTrack.append(card);
   divTrack.append(card2);
   compteurdiv.append(compteurp);
-  homePage.append(compteurdiv, divTrack);
+  scoreDiv.append(scorep);
+  homePage.append(compteurdiv, scoreDiv, divTrack);
   container.append(homePage);
 
   // ! Création de skinPage
