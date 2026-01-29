@@ -357,8 +357,9 @@ function gameLoop(player) {
     scorestorage = parseInt(localStorage.getItem("Scoretotalcoin"));
     console.log(scorestorage);
     console.log(coinsvalue);
+    console.log(Math.round(scoreDistance));
     canva.style.display = "none";
-    scoreDistance = 0;
+
     // ! coinsvalue = 0;
     // const caca = localStorage.setItem("Scoretotalcoin", 0);
     // scorestorage = localStorage.getItem(caca);
@@ -366,7 +367,8 @@ function gameLoop(player) {
     //Affichage Résultat score distance et coin de la partie finie au game over
 
     let scoreCoinFinal = `Votre score de pièce ${coinsvalue}`;
-    let scoreDistanceFinal = `Distance parcourue ${scoreDistance}`;
+    let scoreDistanceFinal = `Distance parcourue ${Math.round(scoreDistance)}`;
+    scoreDistance = 0;
     const coin = document.getElementById("coin");
     const distance = document.getElementById("distance");
     coin.textContent = scoreCoinFinal;
@@ -380,14 +382,23 @@ function gameLoop(player) {
 
     //Affichage des meilleurs résultats à la page d'accueil
 
-    let scoreCoinTotal = `Total des pièces en stock ${scorestorage}`;
-    let scoreMeilleurDistance = `Meilleure distance parcourue ${scoremeilleurdistance}`;
-    const cointotal = document.getElementById("coin-total");
-    const meilleuredistance = document.getElementById("meilleure-distance");
-    cointotal.textContent = scoreCoinTotal;
-    meilleuredistance.textContent = scoreMeilleurDistance;
+    // let scoreCoinTotal = `Total des pièces en stock ${scorestorage}`;
+    // let scoreMeilleurDistance = `Meilleure distance parcourue ${scoremeilleurdistance}`;
+    // const cointotal = document.getElementById("coin-total");
+    // console.log(scoreCoinTotal);
+    // const meilleuredistance = document.getElementById("meilleure-distance");
+    // cointotal.textContent = scoreCoinTotal;
+    // meilleuredistance.textContent = scoreMeilleurDistance;
   }
 }
+
+let scoreCoinTotal = `Total des pièces en stock ${scorestorage}`;
+let scoreMeilleurDistance = `Meilleure distance parcourue ${scoremeilleurdistance}`;
+const cointotal = document.getElementById("coin-total");
+console.log(scoreCoinTotal);
+const meilleuredistance = document.getElementById("meilleure-distance");
+cointotal.textContent = scoreCoinTotal;
+meilleuredistance.textContent = scoreMeilleurDistance;
 
 const btnplay = document.getElementById("play");
 

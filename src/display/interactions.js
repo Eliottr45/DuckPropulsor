@@ -230,7 +230,7 @@ function attachEvent() {
     setting.style.display = "none";
   });
 
-  // const GameOverPage = document.getElementById("game-over-page");
+  const GameOverPage = document.getElementById("game-over-page");
   // const buttonPlayAgain = document.getElementById("buttonRejouer");
   // buttonPlayAgain.addEventListener("click", () => {
   //   play.style.display = "block";
@@ -242,5 +242,16 @@ function attachEvent() {
   buttonGoHome.addEventListener("click", () => {
     homePage.style.display = "block";
     GameOverPage.style.display = "none";
+
+    let scorestorage = parseInt(localStorage.getItem("Scoretotalcoin"));
+    let scoremeilleurdistance = localStorage.getItem("meilleurdistance");
+
+    let scoreCoinTotal = `Total des pièces en stock ${scorestorage}`;
+    let scoreMeilleurDistance = `Meilleure distance parcourue ${scoremeilleurdistance}`;
+    const cointotal = document.getElementById("coin-total");
+    console.log(scoreCoinTotal);
+    const meilleuredistance = document.getElementById("meilleure-distance");
+    cointotal.textContent = scoreCoinTotal;
+    meilleuredistance.textContent = scoreMeilleurDistance;
   });
 }
