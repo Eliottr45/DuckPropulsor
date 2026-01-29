@@ -270,6 +270,7 @@ function checkCollisions(player) {
 }
 
 function gameLoop(player) {
+  //if( ispaused === false) =>
   // On update la position du joueur (il peut être entrain de voler ou de tomber)
   player.update();
 
@@ -310,6 +311,9 @@ function gameLoop(player) {
   player.insertPlayerImg(imageJoueur, ctx);
 
   // Condition permettant le refresh du jeu toute les 16ms, le jeu s'arrete
+  //}
+  //else if(ispause){}
+
   if (player.getAlive()) {
     requestAnimationFrame(() => gameLoop(player));
   } else {
