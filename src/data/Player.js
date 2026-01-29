@@ -42,11 +42,11 @@ export class Player {
   update() {
     if (!this.#alive) return;
 
-    const gravity = 0.3;
+    const gravity = 0.15;
 
-    const jetpackPower = 0.8;
+    const jetpackPower = 0.5;
 
-    const maxFallSpeed = 3;
+    const maxFallSpeed = 2;
     const maxRiseSpeed = -3;
 
     this.#velocity += gravity;
@@ -89,21 +89,59 @@ export class Player {
 
   die() {
     this.#alive = false;
+    const dieSound = new Audio("./src/assets/dieDuck.mp3");
+    dieSound.preload = "auto";
+    dieSound.currentTime = 0;
+    dieSound.play().catch((e) => console.error("Lecture bloquée :", e));
     console.log("Le joueur est mort !");
   }
 
   _initFly() {
-    document.addEventListener("keydown", (event) => {
-      if (event.code === "Space") {
-        event.preventDefault();
+    const flySound = new Audio("./src/assets/flySound.mp3");
+    flySound.preload = "auto";
+
+    const jumpAction = () => {
+      // On récupère la page de jeu
+      const playPage = document.getElementById("play-page");
+
+      // On vérifie si la page de jeu est affichée
+      // (Si elle n'est pas en "none", c'est qu'on joue)
+      const isPlaying = playPage && playPage.style.display !== "none";
+
+      if (!this.pressedSpace && isPlaying) {
         this.pressedSpace = true;
+        flySound.currentTime = 0;
+        flySound.play().catch((e) => console.log("Audio en attente"));
+        console.log("Propulsion !");
+      }
+    };
+
+    const stopAction = () => {
+      this.pressedSpace = false;
+    };
+
+    // 1. CLAVIER
+    document.addEventListener("keydown", (e) => {
+      if (e.code === "Space") {
+        e.preventDefault();
+        jumpAction();
+      }
+    });
+    document.addEventListener("keyup", (e) => {
+      if (e.code === "Space") stopAction();
+    });
+
+    // 2. TACTILE & SOURIS (Pointer Events)
+    // 'pointerdown' détecte le clic gauche ET le premier doigt posé
+    document.addEventListener("pointerdown", (e) => {
+      // On vérifie que c'est bien le bouton principal (gauche ou doigt)
+      if (e.isPrimary) {
+        jumpAction();
       }
     });
 
-    document.addEventListener("keyup", (event) => {
-      if (event.code === "Space") {
-        this.pressedSpace = false;
-      }
+    document.addEventListener("pointerup", (e) => {
+      if (e.isPrimary) stopAction();
     });
   }
 
