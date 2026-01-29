@@ -1,16 +1,10 @@
 import { Objects } from "./Objects.js";
 export class Coins extends Objects {
-  #coins;
   #collected;
 
   constructor(coordX, coordY, width, height) {
     super(coordX, coordY, width, height);
-    this.#coins = 0;
     this.#collected = false;
-  }
-
-  getCoin() {
-    return this.#coins;
   }
 
   getRandomNumber(min, max) {
