@@ -30,6 +30,10 @@ export class Player {
     return this.#coordY;
   }
 
+  getAlive() {
+    return this.#alive;
+  }
+
   // player.js
   getEndCoordX() {
     return this.#coordX + this.#width; // Calculer en direct

@@ -1,28 +1,13 @@
+import { Objects } from "./Objects.js";
+
 export class Obstacles extends Objects {
-  constructor(x, y, width, height) {
-    super();
-    this.x = x;
-    this.y = y;
-    this.width = width;
-    this.height = height;
+  constructor(coordX, coordY, width, height) {
+    super(coordX, coordY, width, height);
   }
 
-  // faire passer en paramètres une instance de la class player
-  onCollide(player) {
-    if (!player.isAlive) return false;
-
-    // récupération des position du player a travers un tableau des données du player
-    const playerBounds = player.getBounds();
-    return (
-      this.x <= playerBounds.endX &&
-      this.x + this.width >= playerBounds.startX &&
-      this.y <= playerBounds.endY &&
-      this.y + this.height >= playerBounds.startY
-    );
-  }
-
-  // faire passer en paramètres une instance de la class player
   update(player) {
+    if (!player.getAlive()) return false;
+
     if (this.onCollide(player)) {
       this.action(player);
       return true;
@@ -30,8 +15,27 @@ export class Obstacles extends Objects {
     return false;
   }
 
-  // ajout d'une condition dans le main.js if(player.getAlive === false){end of game}
   action(player) {
     player.die();
   }
+
+  moveLeft(speed) {
+    let currentX = this.getCoordX();
+    currentX -= speed;
+    this.setPositionX(currentX);
+    if (currentX + this.getWidth() < 0) {
+      const temp = window.innerWidth * 2;
+      const newX = this.getRandomNumber(window.innerWidth, temp);
+      const canvasHeight = document.getElementById("game").height;
+      const obstacleHeight = this.getHeight();
+
+      const newY = this.getRandomNumber(0, canvasHeight - obstacleHeight);
+
+      this.setPositionX(newX);
+      this.setPositionY(newY);
+    }
+  }
 }
+// while (this.getCoordY + this.getHeight > window.innerHeight) {
+//   this.setPositionY += 10;
+// }
