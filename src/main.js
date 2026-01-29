@@ -150,27 +150,6 @@ function checkCollisions(player) {
     }
   });
 
-  let scoreDistance = 0;
-  let lastTime = 2;
-
-  const buttonPlay = document.getElementById("play");
-
-  buttonPlay.addEventListener("click", () => {
-    lastTime = performance.now();
-    affichageScore();
-  });
-
-  function affichageScore() {
-    const now = performance.now();
-    scoreDistance += (now - lastTime) * 0.01;
-    lastTime = now;
-
-    document.getElementById("score-coins").textContent =
-      Math.floor(scoreDistance);
-
-    requestAnimationFrame(affichageScore);
-  }
-
   // Pour chaque obstacles on vérifie collision
   tableObstacles.forEach((obstacle) => {
     if (obstacle.onCollide(player)) {
@@ -179,6 +158,27 @@ function checkCollisions(player) {
       console.log(player.getAlive);
     }
   });
+}
+
+let scoreDistance = 0;
+let lastTime = 2;
+
+const buttonPlay = document.getElementById("play");
+
+buttonPlay.addEventListener("click", () => {
+  lastTime = performance.now();
+  affichageScore();
+});
+
+function affichageScore() {
+  const now = performance.now();
+  scoreDistance += (now - lastTime) * 0.01;
+  lastTime = now;
+
+  document.getElementById("score-coins").textContent =
+    Math.floor(scoreDistance);
+
+  requestAnimationFrame(affichageScore);
 }
 
 function gameLoop(player) {
@@ -205,7 +205,6 @@ function gameLoop(player) {
   tableCoins.forEach((coin) => {
     // Affichage de la hitbox (debug)
     coin.hitBox(ctx);
-    // Affichage de l'image de la pièce
     coin.insertasset(image, ctx);
   });
 
@@ -226,10 +225,79 @@ function gameLoop(player) {
   } else {
     console.log("Game Over");
     // faire un affichage d'une page game over
+    const canva = document.getElementById("game");
+    const playPage = document.getElementById("play-page");
+    const GameOverPage = document.getElementById("game-over-page");
+    const canvas = document.getElementById("game");
+    canvas.style.backgroundColor = "transparent";
+    playPage.style.display = "none";
+    GameOverPage.style.display = "block";
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     totalCoins(coinsvalue, scorestorage);
-    scorestorage = localStorage.getItem("Scoretotalcoin");
+    scorestorage = parseInt(localStorage.getItem("Scoretotalcoin"));
     console.log(scorestorage);
+    console.log(coinsvalue);
+    canva.style.display = "none";
+    scoreDistance = 0;
+    // ! coinsvalue = 0;
+    // const caca = localStorage.setItem("Scoretotalcoin", 0);
+    // scorestorage = localStorage.getItem(caca);
   }
 }
 
-gameLoop(player);
+const btnplay = document.getElementById("play");
+
+btnplay.addEventListener("click", () => {
+  playAgain();
+  canvas.style.backgroundColor = "";
+});
+
+// Dans src/main.js
+
+function playAgain() {
+  // Réinitialisation score et coord du player
+  player.reset(500, 300);
+  coinsvalue = 0;
+  scoreDistance = 0;
+  lastTime = performance.now();
+
+  // MIse à jour du score
+  const compteur = document.getElementById("compteur-coins");
+  if (compteur) compteur.textContent = `🪙 ${coinsvalue}`;
+
+  const canvasWidth = canvas.width; // Assure-toi que canvas est accessible
+
+  tableObstacles.forEach((obstacle) => {
+    // On les replace aléatoirement hors champ à droite
+    obstacle.setPositionX(canvasWidth + getRandomNumber(0, canvasWidth));
+  });
+
+  tableCoins.forEach((coin) => {
+    coin.setPositionX(canvasWidth + getRandomNumber(0, canvasWidth));
+    // Si tu as une propriété "collected" sur les coins, remets-la à false ici si nécessaire
+  });
+
+  // 4. Relancer la boucle de jeu
+  affichageScore();
+  gameLoop(player);
+}
+
+const btnReplay = document.getElementById("buttonRejouer");
+
+if (btnReplay) {
+  btnReplay.addEventListener("click", () => {
+    const gameOverPage = document.getElementById("game-over-page");
+    const playPage = document.getElementById("play-page");
+    const canvas = document.getElementById("game");
+
+    if (gameOverPage) gameOverPage.style.display = "none";
+    if (playPage) playPage.style.display = "block";
+
+    if (canvas) {
+      canvas.style.display = "block";
+      canvas.style.backgroundColor = "";
+    }
+
+    playAgain();
+  });
+}

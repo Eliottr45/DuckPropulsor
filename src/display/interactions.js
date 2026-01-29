@@ -11,6 +11,15 @@ function createElements(container) {
   const titleHomePage = document.createElement("h1");
   titleHomePage.textContent = "DuckPropulsor";
 
+  const scoreCoinAndDistance = document.createElement("div");
+  scoreCoinAndDistance.setAttribute("id", "divCoinAndDistance");
+
+  const scoreCoinsP = document.createElement("p");
+  scoreCoinsP.setAttribute("id", "coin-total");
+
+  const scoreDistanceP = document.createElement("p");
+  scoreDistanceP.setAttribute("id", "meilleure-distance");
+
   const divFlex = document.createElement("div");
   divFlex.classList.add("flex");
 
@@ -26,8 +35,9 @@ function createElements(container) {
   buttonSetting.setAttribute("id", "setting");
   buttonSetting.textContent = "Paramètres";
 
+  scoreCoinAndDistance.append(scoreCoinsP, scoreDistanceP);
   divFlex.append(buttonPlay, buttonSkin, buttonSetting);
-  sectionHomePage.append(titleHomePage, divFlex);
+  sectionHomePage.append(titleHomePage, scoreCoinAndDistance, divFlex);
   container.append(sectionHomePage);
 
   // ! Création de la page de jeu
@@ -60,13 +70,28 @@ function createElements(container) {
   const img2 = document.createElement("img");
   img2.setAttribute("src", "./src/assets/test.jpg");
 
+  // * div de pause pour le jeu
+
+  const divPause = document.createElement("div");
+  divPause.setAttribute("id", "div-pause");
+  const imgPause = document.createElement("img");
+  imgPause.setAttribute("src", "./src/assets/pause.png");
+  imgPause.setAttribute("id", "pause-image");
+  const pauseP = document.createElement("p");
+  pauseP.setAttribute("id", "pause-text");
+  pauseP.textContent = "Press P to continue";
+
+  divPause.style.display = "none";
+
+  divPause.append(imgPause, pauseP);
+
   card2.append(img2);
   card.append(img);
   divTrack.append(card);
   divTrack.append(card2);
   compteurdiv.append(compteurp);
   scoreDiv.append(scorep);
-  homePage.append(compteurdiv, scoreDiv, divTrack);
+  homePage.append(compteurdiv, scoreDiv, divTrack, divPause);
   container.append(homePage);
 
   // ! Création de skinPage
@@ -98,6 +123,43 @@ function createElements(container) {
 
   sectionSettingPage.append(btnBackSetting, titleSettingPage);
   container.append(sectionSettingPage);
+
+  // ! Création de la page Game Over
+  const GameOverPage = document.createElement("section");
+  GameOverPage.setAttribute("id", "game-over-page");
+  GameOverPage.style.display = "none";
+
+  const logo = document.createElement("img");
+  logo.setAttribute("src", "./src/assets/player.png");
+
+  const textGameOver = document.createElement("h2");
+  textGameOver.setAttribute("id", "text-game-over");
+  textGameOver.textContent = "Game Over ! bouahahahah";
+
+  const divText = document.createElement("div");
+  divText.setAttribute("id", "text");
+
+  const scoreDistance = document.createElement("p");
+  scoreDistance.setAttribute("id", "distance");
+
+  const scoreCoin = document.createElement("p");
+  scoreCoin.setAttribute("id", "coin");
+
+  const divButton = document.createElement("div");
+  divButton.setAttribute("id", "btn");
+
+  const buttonRejouer = document.createElement("button");
+  buttonRejouer.setAttribute("id", "buttonRejouer");
+  buttonRejouer.textContent = "Rejouer";
+
+  const buttonGoHomePage = document.createElement("button");
+  buttonGoHomePage.setAttribute("id", "buttonGoHomePage");
+  buttonGoHomePage.textContent = "Accueil";
+
+  divText.append(scoreDistance, scoreCoin);
+  divButton.append(buttonRejouer, buttonGoHomePage);
+  GameOverPage.append(logo, textGameOver, divText, divButton);
+  container.append(GameOverPage);
 
   // ! Création du setInterval
   const track = document.querySelector(".track");
@@ -136,7 +198,6 @@ function attachEvent() {
   const buttonPlay = document.getElementById("play");
   const homePage = document.getElementById("home-page");
   const play = document.getElementById("play-page");
-  const canva = document.getElementById("game");
   buttonPlay.addEventListener("click", () => {
     homePage.style.display = "none";
     play.style.display = "block";
@@ -167,5 +228,19 @@ function attachEvent() {
   buttonBackSetting.addEventListener("click", () => {
     homePage.style.display = "block";
     setting.style.display = "none";
+  });
+
+  // const GameOverPage = document.getElementById("game-over-page");
+  // const buttonPlayAgain = document.getElementById("buttonRejouer");
+  // buttonPlayAgain.addEventListener("click", () => {
+  //   play.style.display = "block";
+  //   GameOverPage.style.display = "none";
+  //   playAgain();
+  // });
+
+  const buttonGoHome = document.getElementById("buttonGoHomePage");
+  buttonGoHome.addEventListener("click", () => {
+    homePage.style.display = "block";
+    GameOverPage.style.display = "none";
   });
 }
