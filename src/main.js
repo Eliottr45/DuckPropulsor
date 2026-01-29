@@ -37,27 +37,31 @@ const canvas = getCanvas();
 const ctx = getContext();
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
-positionObstaclesX = canvas.width + getRandomNumber(0, canvas.width);
 
 // Il faut modifier la height de chaque obstacle pour le responsive (faire en sorte que la height se calcul par rapport a la height de l'écran de l'utilisateur)
-const obstacles = new Obstacles(positionObstaclesX, 0, 50, 300);
+const obstacles = new Obstacles(
+  canvas.width + getRandomNumber(0, canvas.width),
+  0,
+  50,
+  300,
+);
 
 const obstacles2 = new Obstacles(
-  positionObstaclesX,
+  canvas.width + getRandomNumber(0, canvas.width),
   canvas.height - 500,
   50,
   500,
 );
 
 const obstacles3 = new Obstacles(
-  positionObstaclesX,
+  canvas.width + getRandomNumber(0, canvas.width),
   canvas.height / 2 - 100,
   50,
   200,
 );
 
 const obstacles4 = new Obstacles(
-  positionObstaclesX,
+  canvas.width + getRandomNumber(0, canvas.width),
   canvas.height - 50,
   700,
   50,
@@ -67,31 +71,31 @@ const obstacles4 = new Obstacles(
 
 // instanciation des coins
 const coins = new Coins(
-  positionObstaclesX,
+  canvas.width + getRandomNumber(0, canvas.width),
   getRandomNumber(100, canvas.height - 100),
   50,
   50,
 );
 const coins2 = new Coins(
-  positionObstaclesX,
+  canvas.width + getRandomNumber(0, canvas.width),
   getRandomNumber(100, canvas.height - 100),
   50,
   50,
 );
 const coins3 = new Coins(
-  positionObstaclesX,
+  canvas.width + getRandomNumber(0, canvas.width),
   getRandomNumber(100, canvas.height - 100),
   50,
   50,
 );
 const coins4 = new Coins(
-  positionObstaclesX,
+  canvas.width + getRandomNumber(0, canvas.width),
   getRandomNumber(100, canvas.height - 100),
   50,
   50,
 );
 const coins5 = new Coins(
-  positionObstaclesX,
+  canvas.width + getRandomNumber(0, canvas.width),
   getRandomNumber(100, canvas.height - 100),
   50,
   50,
