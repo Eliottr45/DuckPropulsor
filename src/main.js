@@ -132,7 +132,7 @@ function gameLoop(player) {
   if (player.getAlive()) {
     requestAnimationFrame(() => gameLoop(player));
   } else {
-    console.log("Game Over");
+    console.log("Game Over");    
   }
 }
 
