@@ -205,6 +205,10 @@ function attachEvent() {
   const homePage = document.getElementById("home-page");
   const play = document.getElementById("play-page");
   buttonPlay.addEventListener("click", () => {
+    const soundBack = new Audio("./src/assets/soundBack.mp3");
+    soundBack.preload = "auto";
+    soundBack.currentTime = 0;
+    soundBack.play().catch((e) => console.error("Lecture bloquée :", e));
     homePage.style.display = "none";
     play.style.display = "block";
     game.style.display = "block";

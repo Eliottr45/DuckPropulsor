@@ -216,6 +216,10 @@ function checkCollisions(player) {
       if (compteur) {
         compteur.textContent = `🪙 ${coinsvalue}`;
       }
+      const coinSound = new Audio("./src/assets/coinSound.mp3");
+      coinSound.preload = "auto";
+      coinSound.currentTime = 0;
+      coinSound.play().catch((e) => console.error("Lecture bloquée :", e));
     }
   });
 
