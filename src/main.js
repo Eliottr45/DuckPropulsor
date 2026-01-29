@@ -7,6 +7,7 @@ import { Player } from "./data/player.js";
 import { Obstacles } from "./data/Obstacles.js";
 
 const container = document.body;
+let playerMoveUpdateInterval;
 
 init(container);
 
@@ -293,16 +294,11 @@ function gameLoop(player) {
   // On update la position du joueur (il peut être entrain de voler ou de tomber)
 
   // Pour chaque pièces on les déplaces vers la gauche
-  tableCoins.forEach((coin) => {
-    coin.moveLeft(2);
-    coinObstacleCollide(coin, tableObstacles);
-  });
   if (ispaused === false) {
-    player.update();
-
     // Pour chaque pièces on les déplaces vers la gauche
     tableCoins.forEach((coin) => {
       coin.moveLeft(2);
+      coinObstacleCollide(coin, tableObstacles);
     });
 
     // On déplace chaque obstacles vers la gauche
@@ -358,7 +354,6 @@ function gameLoop(player) {
     playPage.style.display = "none";
     GameOverPage.style.display = "block";
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    totalCoins(coinsvalue, scorestorage);
     scorestorage = parseInt(localStorage.getItem("Scoretotalcoin"));
     console.log(scorestorage);
     console.log(coinsvalue);
@@ -406,6 +401,7 @@ btnplay.addEventListener("click", () => {
 function playAgain() {
   // Réinitialisation score et coord du player
   player.reset(500, 300);
+  clearInterval(playerMoveUpdateInterval);
   coinsvalue = 0;
   scoreDistance = 0;
   lastTime = performance.now();
@@ -428,6 +424,10 @@ function playAgain() {
   // 4. Relancer la boucle de jeu
   affichageScore();
   gameLoop(player);
+
+  playerMoveUpdateInterval = setInterval(() => {
+    !ispaused && player.update();
+  }, 1000 / 144);
 }
 
 const btnReplay = document.getElementById("buttonRejouer");
