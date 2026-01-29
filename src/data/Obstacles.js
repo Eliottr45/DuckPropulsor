@@ -4,7 +4,12 @@ export class Obstacles extends Objects {
   #startX;
   constructor(coordX, coordY, width, height) {
     super(coordX, coordY, width, height);
-    this.#startX = this.coordX;
+    this.#startX = coordX;
+  }
+
+  resetToDefault() {
+    console.log("Resetting to:", this.#startX);
+    this.setPositionX(this.#startX);
   }
 
   update(player) {
@@ -25,7 +30,7 @@ export class Obstacles extends Objects {
     let currentX = this.getCoordX();
     currentX -= speed;
 
-    const levelLength = 7500;
+    const levelLength = 8000;
 
     if (currentX + this.getWidth() < 0) {
       this.setPositionX(currentX + levelLength);

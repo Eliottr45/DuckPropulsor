@@ -361,8 +361,7 @@ function playAgain() {
   const canvasWidth = canvas.width; // Assure-toi que canvas est accessible
 
   tableObstacles.forEach((obstacle) => {
-    // On les replace aléatoirement hors champ à droite
-    obstacle.setPositionX(canvasWidth + getRandomNumber(0, canvasWidth));
+    obstacle.resetToDefault();
   });
 
   tableCoins.forEach((coin) => {
