@@ -3,7 +3,7 @@ import { init } from "./display/interactions.js";
 import { Coins } from "./data/Coins.js";
 import monImage from "./assets/coins.png";
 import imagePlayer from "./assets/player.png";
-import { Player } from "./data/player.js";
+import { Player } from "./data/Player.js";
 import { Obstacles } from "./data/Obstacles.js";
 
 const container = document.body;
