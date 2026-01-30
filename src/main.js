@@ -1,10 +1,10 @@
 import "./style.css";
-import { init } from "./display/interactions.js";
-import { Coins } from "./data/Coins.js";
-import monImage from "./assets/coins.png";
-import imagePlayer from "./assets/player.png";
-import { Player } from "./data/Player.js";
-import { Obstacles } from "./data/Obstacles.js";
+import { init } from "./display/interactions.js"; // OK (extension présente)
+import { Coins } from "./data/Coins.js"; // Ajout du .js
+import monImage from "./assets/coins.png"; // OK
+import imagePlayer from "./assets/player.png"; // OK
+import { Player } from "./data/Player.js"; // Ajout du .js + Majuscule respectée
+import { Obstacles } from "./data/Obstacles.js"; // Ajout du .js
 
 const container = document.body;
 let playerMoveUpdateInterval;
