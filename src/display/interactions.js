@@ -236,7 +236,7 @@ function attachEvent() {
 
   const buttonBackSetting = document.getElementById("btn-back-setting");
   buttonBackSetting.addEventListener("click", () => {
-    homePage.style.display = "block";
+    homePage.style.display = "flex";
     setting.style.display = "none";
   });
 
