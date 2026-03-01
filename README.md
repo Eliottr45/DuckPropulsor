@@ -1,5 +1,5 @@
 
-<img width="174" height="151" alt="duckpropulsor" src="https://github.com/user-attachments/assets/d947d189-fc08-4333-8fe9-9c829f45ac62" />
+<div align="center" ><img  width="174" height="151" alt="duckpropulsor" src="https://github.com/user-attachments/assets/d947d189-fc08-4333-8fe9-9c829f45ac62" /></div>
 
 # DuckPropulsor
 
