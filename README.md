@@ -37,17 +37,37 @@ Il applique les notions vues au cours de nos 3 semaines de cours sur le langage 
 
 - Programmation Orientée Objet (POO)
 - langage javascript
+- gestion d'un localstorage
 
 ### Répartition des tâches dans le Groupe
 
 [**Eliot TOURTELIER**](https://github.com/Eliottr45):  
-Réalisation de la partie remboursement du site et mise en place de la structure de base des Contrôleurs, Modèles et Vues du site
+fonction de création de la HitBox des objets
+Création des classes filles Coins et Obstacles
+Déplacement du Player
+Eviter les collisions des pièces avec les obstacles
 
 [**Félix PARENDEAU MILLERIOUX**](https://github.com/felix-pm):  
-Réalisation du css du site et mise en place de la structure de base des Contrôleurs, Modèles et Vues du site
+Création de la structure html
+Gestion du Background du jeu qui défile en continue
+Gestion du défilement des objets
+Gestion de la pause du jeu
 
 [**Pierre SOREAU**](https://github.com/PierreSoreau):  
-Réalisation de la partie dépense et création des groupes de dépense du site
+Définition de la classe mère des objects qui représenteront joueur, obstacles et pièces
+Gestion du compteur des pièces pendant la partie
+Gestion du localstorage qui enregistre le montant total des pièces récoltées de toutes les parties et la meilleure distance parcourue
+Gestion de la pause du jeu
+
+### Difficultées rencontrées
+## 🧠 Défis techniques et apprentissages
+
+* **Architecture logicielle (Design Pattern) :** L'un des grands défis a été d'appréhender et d'implémenter le **modèle Composite**. Il a fallu repenser la structure du code pour assembler les différents éléments du jeu de manière hiérarchique, afin de pouvoir traiter des groupes d'objets de la même manière qu'un objet unique.
+* **Gestion du Scrolling Infini (Seamless) :** Pour reproduire l'effet de course infinie, il fallait gérer le déplacement continu du décor. La difficulté mathématique et logique était d'instancier, recycler et repositionner les éléments graphiques hors de l'écran de manière fluide, sans qu'ils ne se chevauchent ou ne créent de "trous" visuels.
+* **Modélisation Orientée Objet (POO) :** Un important travail d'abstraction a été nécessaire pour évaluer et définir les fonctions indispensables de chaque entité du jeu (le canard, les obstacles, le décor). L'objectif était de créer des classes avec des responsabilités claires et uniques pour garder un code modulaire et maintenable.
+Se familiariser avec le modèle composite
+Gérer le déplacement infini du décor sans qu'ils se touchent entre eux
+Evaluer les fonctions indispensables qui définissent un objet
 
 
   
