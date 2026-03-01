@@ -11,6 +11,27 @@ Jeu d'arcade inspiré de jetpack joyride. Ici c'est un canard qui est propulsé 
 * **Esquive et Obstacles:** Des obstacles sur le chemin du canard qu'il doit éviter sans quoi sa mort est assurée .
 * **Système de score :** Ramassage de pièces tout au long du parcours et enregistrement de la distance maximale parcourue (High Score) pour encourager la rejouabilité.
 
+## Comment lancer notre jeu?
+
+### 1. Prérequis
+Assurez-vous d'avoir [Node.js](https://nodejs.org/) installé sur votre ordinateur.
+
+### 2. Cloner le projet
+Récupérez le code source depuis GitHub :
+```bash
+git clone [https://github.com/Eliottr45/DuckPropulsor.git](https://github.com/Eliottr45/DuckPropulsor.git)
+```
+### 3. Installer l'outil Vite.js pour retranscrire et compresser le code pour le navigateur
+```bash
+npm install
+```
+### 4. Démarrer le jeu
+```bash
+npm run dev
+```
+### 5. Jouer
+Cliquer sur le lien généré et amusez-vous avec notre jeu
+
 
 ## 🛠️ Technologies utilisées
 
