@@ -80,9 +80,7 @@ Gestion du compteur des pièces pendant la partie
 Gestion du localstorage qui enregistre le montant total des pièces récoltées de toutes les parties et la meilleure distance parcourue
 Gestion de la pause du jeu
 
-## Difficultées rencontrées
-
-### 🧠 Défis techniques et apprentissages
+## 🧠 Difficultées rencontrées
 
 * **Architecture logicielle (Design Pattern) :** L'un des grands défis a été d'appréhender et d'implémenter le **modèle Composite**. Il a fallu repenser la structure du code pour assembler les différents éléments du jeu de manière hiérarchique, afin de pouvoir traiter des groupes d'objets de la même manière qu'un objet unique.
 * **Gestion du Scrolling Infini (Seamless) :** Pour reproduire l'effet de course infinie, il fallait gérer le déplacement continu du décor. La difficulté mathématique et logique était d'instancier, recycler et repositionner les éléments graphiques hors de l'écran de manière fluide, sans qu'ils ne se chevauchent ou ne créent de "trous" visuels.
