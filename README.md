@@ -19,7 +19,7 @@ Assurez-vous d'avoir [Node.js](https://nodejs.org/) installé sur votre ordinate
 ### 2. Cloner le projet
 Récupérez le code source depuis GitHub :
 ```bash
-git clone [https://github.com/Eliottr45/DuckPropulsor.git](https://github.com/Eliottr45/DuckPropulsor.git)
+git clone https://github.com/Eliottr45/DuckPropulsor.git
 ```
 ### 3. Installer l'outil Vite.js pour retranscrire et compresser le code pour le navigateur
 ```bash
