@@ -1,5 +1,5 @@
 
-![duckpropulsor](https://github.com/user-attachments/assets/e690aa86-1667-432f-b5f3-850bae768b06)
+<img width="174" height="151" alt="duckpropulsor" src="https://github.com/user-attachments/assets/d947d189-fc08-4333-8fe9-9c829f45ac62" />
 
 # DuckPropulsor
 
