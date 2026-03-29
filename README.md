@@ -63,22 +63,22 @@ Il applique les notions vues au cours de nos 3 semaines de cours sur le langage 
 ### Répartition des tâches dans le Groupe
 
 [**Eliot TOURTELIER**](https://github.com/Eliottr45):  
-fonction de création de la HitBox des objets
-Création des classes filles Coins et Obstacles
-Déplacement du Player
-Eviter les collisions des pièces avec les obstacles
+- fonction de création de la HitBox des objets
+- Création des classes filles Coins et Obstacles
+- Déplacement du Player
+- Eviter les collisions des pièces avec les obstacles
 
 [**Félix PARENDEAU MILLERIOUX**](https://github.com/felix-pm):  
-Création de la structure html
-Gestion du Background du jeu qui défile en continue
-Gestion du défilement des objets
-Gestion de la pause du jeu
+- Création de la structure html
+- Gestion du Background du jeu qui défile en continue
+- Gestion du défilement des objets
+- Gestion de la pause du jeu
 
 [**Pierre SOREAU**](https://github.com/PierreSoreau):  
-Définition de la classe mère des objects qui représenteront joueur, obstacles et pièces
-Gestion du compteur des pièces pendant la partie
-Gestion du localstorage qui enregistre le montant total des pièces récoltées de toutes les parties et la meilleure distance parcourue
-Gestion de la pause du jeu
+- Définition de la classe mère des objects qui représenteront joueur, obstacles et pièces
+- Gestion du compteur des pièces pendant la partie
+- Gestion du localstorage qui enregistre le montant total des pièces récoltées de toutes les parties et la meilleure distance parcourue
+- Gestion de la pause du jeu
 
 ## 🧠 Difficultées rencontrées
 
